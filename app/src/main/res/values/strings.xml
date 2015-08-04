@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AppComments</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">AppStore</string>
+    <string name="title_section2">GooglePlay</string>
+    <string name="title_section3">Online Service</string>
+	<string name="last_update_time">last retrieval time:</string>
+	<string name="retrieve">Get now!</string>
+	<string name="detail">Detail:</string>
+	<string name="cleanCache">Clean Cache</string>
+	<string name="autosyn">Auto-syn is on via wifi</string>
+	<string name="autosynoff">Auto-syn is off</string>	
+</resources>

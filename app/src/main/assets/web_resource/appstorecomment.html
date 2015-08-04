@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <script  type="text/javascript" src="iscroll.js"></script>
+    <script  type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script  type="text/javascript" src="jquery.easydropdown.js"></script>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="easydropdown.css">
+    <style type="text/css" media="all">
+			body,ul,li {
+				padding:0;
+				margin:0;
+				border:0;
+			}
+			
+			body {
+				font-size:12px;
+				-webkit-user-select:none;
+			    -webkit-text-size-adjust:none;
+				font-family:helvetica;
+			}
+			
+			
+			
+			
+			#header {
+				position:fixed; z-index:2;
+				top:0; left:0;
+				width:100%;
+				height:65px;
+				line-height:45px;
+				background-color:#0321FF;
+				background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #FD3030), color-stop(0.05, #F10000), color-stop(1, #9C0303));
+				background-image:-moz-linear-gradient(top, #366CF5, #1FC3EC 5%, #002EC0);
+				background-image:-o-linear-gradient(top, #366CF5, #1FC3EC 5%, #002EC0);
+				padding:0;
+				color:#eee;
+				font-size:20px;
+				text-align:center;
+				border-bottom: 1px solid #ccc;
+			}
+			
+			
+			#comment-content {
+				position:absolute; z-index:1;
+				top:65px; bottom:48px; left:0;
+				width:100%;
+				height: 85%;
+				background:#aaa;
+				overflow:auto;
+			}
+			
+			#header a {
+				color:#f3f3f3;
+				text-decoration:none;
+				font-weight:bold;
+				text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+			}
+			
+			#footer {
+				position:absolute; z-index:2;
+				bottom:0; left:0;
+				width:100%;
+				height:48px;
+				background-color:#222;
+				background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #999), color-stop(0.02, #666), color-stop(1, #222));
+				background-image:-moz-linear-gradient(top, #999, #666 2%, #222);
+				background-image:-o-linear-gradient(top, #999, #666 2%, #222);
+				padding:0;
+				border-top:1px solid #444;
+			}
+      .retrieval-date-label {
+				position: absolute;
+				font-family: 'Times New Roman';
+				text-align: left;
+				color: rgb(256, 256, 256);
+				height: 30px;
+				width: auto;
+				font-size: 14px;
+				background-image: none;
+				left: 11px;
+      }
+      .retrieval-date {
+				position: relative;
+				width: 194px;
+				height: 30px;
+				font-family: 'Times New Roman';
+				text-align: left;
+				font-size: 19px;
+				color: rgb(0, 0, 0);
+				float: right;
+      }
+      .comment-content {
+        position: absolute;
+        width: 323px;
+        left: 80px;
+        top: 58px;
+      }
+      
+      #pullDown {
+      	height:40px;
+      	background: #fff;
+      	padding: 5px 5px;
+      	line-height:40px;
+      	font-weight:bold;
+      	color:#888;
+      }
+      
+      #touchToShowMore {
+      	height:40px;
+      	background: #fff;
+      	padding: 5px 5px;
+      	line-height:40px;
+      	font-weight:bold;
+      	color:#888;
+      }
+      .flip{
+      	
+      }
+      
+      
+     .pullDownIcon {
+      	display:block; float:left;
+				width:40px; height:40px;
+				background:url(pull-icon@2x.png) 0 0 no-repeat;	
+				background-size: 40px 80px;
+		    -webkit-transition-duration: 0.5s; /* Safari */
+		    transition-duration: 0.5s;
+      }
+     .pullDownIcon.rotate{
+     		background-position:0 0;
+	     	-webkit-transform:rotate(-180deg);
+				-moz-transform:rotate(-180deg);
+				-o-transform:rotate(-180deg);
+				transform:rotate(-180deg);	  
+     }
+     .pullDownIcon.loading{
+     		background-position:0 100%;
+				-webkit-transform:rotate(0deg) translateZ(0);
+				-webkit-transition-duration:0ms;
+			
+				-webkit-animation-name:loadingIcon;
+				-webkit-animation-duration:2s;
+				-webkit-animation-iteration-count:infinite;
+				-webkit-animation-timing-function:linear;
+     }
+     	
+     	.clickToRefreshIcon{
+     		display:none;
+     		float:left;
+				width:40px; height:40px;
+				background:url(pull-icon@2x.png) 0 0 no-repeat;	
+				background-size: 40px 80px;
+		    -webkit-transition-duration: 0.5s; /* Safari */
+		    transition-duration: 0.5s;
+     	}
+     	
+      .clickToRefreshIcon.loading{
+      	display:block;
+     		background-position:0 100%;
+				-webkit-transform:rotate(0deg) translateZ(0);
+				-webkit-transition-duration:0ms;
+			
+				-webkit-animation-name:loadingIcon;
+				-webkit-animation-duration:2s;
+				-webkit-animation-iteration-count:infinite;
+				-webkit-animation-timing-function:linear;
+     }
+     
+     @-webkit-keyframes loadingIcon{
+				from{
+					-webkit-transform:rotate(0);
+				}
+				to{
+					-webkit-transform:rotate(360deg);
+				}
+		 }
+
+     
+     #scroller {
+				position:absolute; z-index:1;
+			/*	-webkit-touch-callout:none;*/
+				-webkit-tap-highlight-color:rgba(0,0,0,0);
+				width:100%;
+				padding:0;
+			}
+			/*
+			#scroller > ul {list-style-type:none;margin:0px;padding:0px;width:100%;}
+			#scroller > ul > li {border-bottom:1px solid #ED9F9F;}
+			#scroller > ul > li > a{display:block;padding:5px 5px 5px 0.5em;text-decoration:none;border-left:12px solid #711515;border-right:1px solid #711515;}
+			#scroller > ul > li > a:link, #navigation > ul > li > a:visited{background-color:#c11136;color:#FFFFFF;}
+			#scroller > ul > li > a:hover{background-color:#990020;color:#ffff00;}
+			#scroller ul li ul{list-style-type:none;margin:0px;padding:0px 0px 0px 0px;}
+			#scroller ul li ul li{border-top:1px solid #ED9F9F;}
+			#scroller ul li ul li a{display:block;padding:3px 3px 3px 0.5em;text-decoration:none;border-left:28px solid #a71f1f;border-right:1px solid #711515;}
+			#scroller ul li ul li a:link, #navigation ul li ul li a:visited{background-color:#e85070;color:#FFFFFF;}
+			#scroller ul li ul li a:hover{background-color:#c2425d;color:#ffff00;}
+			*/
+
+			#scroller > ul {
+				list-style:none;
+				padding:0;
+				margin:0;
+				width:100%;
+				text-align:left;
+			}
+			
+			#scroller > ul > li {
+				height:auto;
+				line-height:40px;
+				border-bottom:1px solid #ccc;
+				border-top:1px solid #fff;
+				background-color:#fafafa;
+				font-size:14px;
+			}
+			#scroller > ul > li > a{
+				display:block;padding:5px 5px 5px 0.5em;text-decoration:none;border-left:12px solid #5DB3D4;border-right:1px solid #5DB3D4;
+				background-color: rgb(240, 217, 217);
+			}
+			/*#scroller > ul > li > a:hover{background-color:#990020;color:#ffff00;}*/
+	
+			#scroller ul li ul li{display:block;text-decoration:none;border-left:28px solid rgb(156, 240, 226);border-right:1px solid rgb(156, 240, 226);}
+
+			
+			/*#scroller li:nth-child(2n){background:#C4C4FF;}*/
+			
+			
+			#scroller > ul > li > ul > li{
+				font-size: 12px;
+				padding-left: 15px;
+				-webkit-transition-duration: 0.5s;
+				transition-duration: 0.5s;
+				border-left: 16px solid rgb(156, 240, 226);
+			}
+			
+			#scroller > ul > li > ul > li:nth-child(n+2){
+				border-top:1px solid #ccc;
+			}
+			
+			@-webkit-keyframes expanding{
+				from{
+					height:0px;
+				}
+				to{
+					height:40px;
+				}
+		 }
+			
+		
+			.country-flag{
+				background-image: url("images/flags/USA.jpg");
+				background-size: 40px 40px;
+				height: 40px;
+				width: 40px;
+				display: inline-block;
+				position: relative;
+				top: 8px;
+			}
+			.author{
+				display: inline-block;
+				font-weight: bold;
+				line-height: 22px;
+				
+			}
+			.post-date{
+				display: inline-block;
+				float: right;
+				margin-right: 10px;
+				line-height: 67px;
+			}
+			.title{
+				line-height: 20px;
+			}
+      .content{
+      	line-height: 24px;
+      }
+      .tips{
+      	color: #888;
+      	line-height: 24px;
+      	text-align: center;
+      }
+      
+      .star{
+      	background-image: url("images/star.png");
+      	display: inline-block;
+				background-size: 14px 14px;
+				height: 14px;
+      }
+      .star-parent{
+      	display: inline-block;
+      	height: 14px;
+      	width: 70px;
+      }
+      
+      #countries{
+      	/*background: rgba(255,255,255,0.5);*/
+      	display: block;
+      }
+      
+      #header .dropdown{
+      	background: rgba(255,255,255,0.5);
+      }
+      
+      #header .dropdown>span{
+      	background: rgba(255,255,255,0.5);
+      }
+      #header .dropdown>div{
+      	background: rgba(255,255,255,0.5);
+      }
+     
+    </style>
+  </head>
+  
+  <body>
+  		<div id="header">
+  			 <select id="countries" class="dropdown" >
+  			 	
+					</select>
+				<div class="retrieval-date-label" style="">last retrieval time:</div>
+	      <div class="retrieval-date" style=""></div>
+      </div>
+   		<div class="comment-content" id="comment-content">
+      <div id="scroller">
+				<div id="pullDown">
+					<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to retrieve...</span>
+				</div>
+				<ul id="thelist">
+					<li>
+						<!--div class="country-flag hidden"></div-->
+						<!--div class="author"></div-->
+						<!--div class="star-parent"><div class="star" style="width:60%"></div></div-->
+						<!--div class="post-date"></div-->
+						<!--div class="title"></div-->
+						
+					</li>
+						
+				</ul>
+						<!--div class="content tips">Pull down to get latest comments !!</div-->					
+						<div class="content tips">Pull down to get latest comments !!</div>			
+							<canvas id="pullButton"></canvas>
+						<!--div class="content tips">Click Here to Show More...</div-->
+						<div id="touchToShowMore">
+							<div class="clickToRefreshIcon"></div><div class="touchToShowMore">Pull Up to Show More...</div>
+						</div>
+			</div>	
+			
+
+   		</div>
+    <script type="text/javascript">
+      (function() {
+var fromIndex = 0; //the item index
+var generatedCount = 0;
+var hasMore = true;
+var hasRefresh = false;
+
+
+var buffCount = 0;
+var mytool = {
+  $:function(id){return document.getElementById(id);},
+  addEvent:function(obj,eventType,fnc){
+    if(window.addEventListener){
+      obj.addEventListener(eventType,fnc,false);
+    }else{
+      obj.attachEvent("on"+eventType,fnc); 
+    }
+  	
+  }
+};
+
+var $countries = $('select');
+var countryInJSON;
+
+var countryOpts = "<option value='@shortname'>@fullname</option>";
+
+var liContent = "<li>"+
+						"<div class=country-flag style=@backgroundUrl></div>"+
+						"<div class=author>@authorName</div>"+
+						"<div class=star-parent><div class=star style='width:@starRating'></div></div>"+
+						"<div class=post-date>@reviewDate</div>"+
+						"<div class=title>@reivewTitle</div>"+
+						"<div class=content>@reviewBody</div>"+				
+					"</li>";
+
+	
+function initValues(){
+	 fromIndex = 0; //the item index
+ 	 generatedCount = 0;
+	 hasMore = true;
+	 hasRefresh = false;
+	 $(touchToShowMore).hide();
+}
+	
+function pullDownAction () {
+	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+		
+		var country = $countries.val();
+		var results = window.Android.getAppStoreComment(country,hasRefresh);
+		var currentTime  = window.Android.getCurrentTime(country);
+		console.log(results);
+		$(".retrieval-date").html(currentTime);
+		
+		var resultInJSON = "";
+		try{
+	 	 	resultInJSON = JSON.parse(results);
+		}catch(e){
+			resultInJSON = "";
+		}
+	  
+	  var myList = $("#thelist");
+	  if(resultInJSON && resultInJSON.length > 0){
+	  	//hide the tips
+			$(".content.tips").hide();
+			$("#pullButton").hide();
+	  	for(var i=resultInJSON.length -1 ; i > -1; i--){
+	  		var authorName = resultInJSON[i].authorName;
+	  		var reviewBody = resultInJSON[i].reviewBody;
+	  		var reivewTitle = resultInJSON[i].reivewTitle;
+	  		var reviewDate = resultInJSON[i].reviewDate;
+	  		var starRating = resultInJSON[i].starRating;
+	  	  switch(starRating){
+	  	  	case "1": starRating = "20%";break;
+	  	  	case "2": starRating = "40%";break;
+	  	  	case "3": starRating = "50%";break;
+	  	  	case "4": starRating = "60%";break;
+	  	  	case "5": starRating = "80%";break;
+	  	  };
+	  		var itemContent = liContent.replace(/@authorName/,authorName).replace(/@reviewBody/,reviewBody).replace(/@reivewTitle/,reivewTitle).replace(/@reviewDate/,reviewDate).replace(/@starRating/,starRating);
+	  		itemContent = itemContent.replace(/@backgroundUrl/,'background-image:url(\"images\/flags\/'+country+'.png\")');
+				myList.prepend(itemContent);
+				fromIndex++;
+	  	}
+	  	hasRefresh = true;
+	  }
+	 /*
+		$(function(){
+			$("li").find("ul").prev().unbind("click");
+			
+			$("li").find("ul").prev().click(function(){
+				$(this).next().toggle(100);
+			});
+			$("li:has(ul)").find("ul").hide();
+		});
+		*/
+		$("#touchToShowMore").show();
+		myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
+		document.querySelector(".pullDownIcon").className = "pullDownIcon";
+	}, 500);	// <-- Simulate network congestion, remove setTimeout from production!
+}
+
+function pullUpAction(){
+			
+			setTimeout(function () {
+				var country = $countries.val();
+				var results = window.Android.getAppStoreCommentContinue(country,fromIndex);
+				var resultInJSON = "";
+				try{
+			 	 	resultInJSON = JSON.parse(results);
+				}catch(e){
+					resultInJSON = "";
+				}
+				console.log(results);
+				 var myList = $("#thelist");
+			  if(resultInJSON && resultInJSON.length > 0){
+			  	//hide the tips
+					$(".content.tips").hide();
+					$("#pullButton").hide();
+			  	for(var i=0  ; i < resultInJSON.length; i++){
+			  		var authorName = resultInJSON[i].authorName;
+			  		var reviewBody = resultInJSON[i].reviewBody;
+			  		var reivewTitle = resultInJSON[i].reivewTitle;
+			  		var reviewDate = resultInJSON[i].reviewDate;
+			  		var starRating = resultInJSON[i].starRating;
+			  	  switch(starRating){
+			  	  	case "1": starRating = "20%";break;
+			  	  	case "2": starRating = "40%";break;
+			  	  	case "3": starRating = "50%";break;
+			  	  	case "4": starRating = "60%";break;
+			  	  	case "5": starRating = "80%";break;
+			  	  };
+			  		var itemContent = liContent.replace(/@authorName/,authorName).replace(/@reviewBody/,reviewBody).replace(/@reivewTitle/,reivewTitle).replace(/@reviewDate/,reviewDate).replace(/@starRating/,starRating);
+			  		itemContent = itemContent.replace(/@backgroundUrl/,'background-image:url(\"images\/flags\/'+country+'.png\")');
+						myList.append(itemContent);
+						fromIndex++;
+			  	}
+			  	hasMore = true;
+			  }else{
+			  	hasMore = false;
+			  }
+			  
+			  
+			  //$("#touchToShowMore").show();
+				myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
+				
+			},1000);
+			//var results = window.Android.getAppStoreCommentContinue(fromIndex);
+	}
+	
+	
+function onCountryChange(selected){
+	// do something
+				console.log("country changed");
+				initValues();
+				var country = selected.target.value;
+				var results = window.Android.getAppStoreCommentOffline(country);
+				var countryUpdateTime = window.Android.getCountryUpdateTime(country);
+				console.log(results);
+				$(".retrieval-date").html(countryUpdateTime);
+				var resultInJSON = "";
+				try{
+			 	 	resultInJSON = JSON.parse(results);
+				}catch(e){
+					resultInJSON = "";
+				}
+			  var myList = $("#thelist");
+			  myList.empty();
+			  if(resultInJSON && resultInJSON.length > 0){
+			  	//hide the tips
+					$(".content.tips").hide();
+					$("#pullButton").hide();
+					$("#touchToShowMore").show();
+			  	for(var i=resultInJSON.length -1 ; i > -1; i--){
+			  		var authorName = resultInJSON[i].authorName;
+			  		var reviewBody = resultInJSON[i].reviewBody;
+			  		var reivewTitle = resultInJSON[i].reivewTitle;
+			  		var reviewDate = resultInJSON[i].reviewDate;
+			  		var starRating = resultInJSON[i].starRating;
+			  	  switch(starRating){
+			  	  	case "1": starRating = "20%";break;
+			  	  	case "2": starRating = "40%";break;
+			  	  	case "3": starRating = "50%";break;
+			  	  	case "4": starRating = "60%";break;
+			  	  	case "5": starRating = "80%";break;
+			  	  };
+			  		var itemContent = liContent.replace(/@authorName/,authorName).replace(/@reviewBody/,reviewBody).replace(/@reivewTitle/,reivewTitle).replace(/@reviewDate/,reviewDate).replace(/@starRating/,starRating);
+			  		itemContent = itemContent.replace(/@backgroundUrl/,'background-image:url(\"images\/flags\/'+country+'.png\")');
+						myList.prepend(itemContent);
+						fromIndex++;
+			  	}
+			  	hasRefresh = true;
+			  }else{
+			  	$(".content.tips").show();
+			  	$("#pullButton").show();
+			  	$("#touchToShowMore").hide();
+			  }
+			 /*
+				$(function(){
+					$("li").find("ul").prev().unbind("click");
+					
+					$("li").find("ul").prev().click(function(){
+						$(this).next().toggle(100);
+					});
+					$("li:has(ul)").find("ul").hide();
+				});
+				*/
+				
+				myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
+				document.querySelector(".pullDownIcon").className = "pullDownIcon";
+}
+/**
+ * Handles the DOMContentLoaded event. The DOMContentLoaded event is
+ * fired when the document has been completely loaded and parsed.
+ */
+
+function handleDomContentLoaded(event) {
+var pullDownOffset = mytool.$("pullDown").offsetHeight;
+var pullDownLabel = document.querySelector(".pullDownLabel")
+var pullDownIcon = document.querySelector(".pullDownIcon");
+var touchToShowMore = document.querySelector("#touchToShowMore");
+var touchToShowMoreOffset = touchToShowMore.offsetHeight;
+$(touchToShowMore).hide();
+var touchToShowMore2 = document.querySelector(".touchToShowMore");
+var clickToRefreshIcon = document.querySelector(".clickToRefreshIcon");
+myScroll = new iScroll('comment-content', {
+		
+		useTransition: true,
+		topOffset: pullDownOffset,
+		onScrollStart: function (){
+			pullDownLabel.innerHTML = "Pull down to retrieve...";
+			pullDownIcon.className = "pullDownIcon";
+		},
+		onRefresh: function () {
+			if(pullDownIcon.className.match("loading")){
+				pullDownLabel.innerHTML = "Pull down to retrieve...";
+				pullDownIcon.className = "pullDownIcon";
+				this.minScrollY = -pullDownOffset;
+			}else if(clickToRefreshIcon.className.match("loading")){
+				clickToRefreshIcon.className = "clickToRefreshIcon";
+			  if(hasMore){
+					touchToShowMore2.innerHTML = "Pull up to show more";
+				}else{
+					touchToShowMore2.innerHTML = "No more comments (maxmum "+buffCount+" latest comments)!!";
+				}
+			}
+
+		},
+		onScrollMove: function () {
+			console.log("maxScrollY : "+this.maxScrollY);
+			console.log("y : "+this.y);
+			if(this.y > 5 && !pullDownIcon.className.match("rotate")){
+				pullDownLabel.innerHTML = "Release to retrieve...";
+				pullDownIcon.className = "pullDownIcon rotate";
+				tempY = this.y;
+				this.minScrollY = 0;	
+			}else if(this.y < 5 && pullDownIcon.className.match("rotate")){
+				pullDownLabel.innerHTML = "Pull down to retrieve...";
+				pullDownIcon.className = "pullDownIcon";
+				this.minScrollY = -pullDownOffset;
+			}else if (this.y < (this.maxScrollY - 5) && !clickToRefreshIcon.className.match("flip") && hasRefresh){
+				clickToRefreshIcon.className = "clickToRefreshIcon flip";
+				if(hasMore){
+					touchToShowMore2.innerHTML = "Release to show more";
+				}else{
+					touchToShowMore2.innerHTML = "No more comments (maxmum "+buffCount+" latest comments)!!";
+				}
+				this.maxScrollY = this.maxScrollY;
+			}else if (this.y > (this.maxScrollY + 5) && clickToRefreshIcon.className.match("flip") && hasRefresh){
+				clickToRefreshIcon.className = "clickToRefreshIcon"
+				if(hasMore){
+					touchToShowMore2.innerHTML = "Pull up to show more";
+				}else{
+					touchToShowMore2.innerHTML = "No more comments (maxmum "+buffCount+" latest comments)!!";
+				}
+				this.maxScrollY = touchToShowMoreOffset;
+			}
+		},
+		onScrollEnd: function () {
+			if(pullDownIcon.className.match("rotate")){
+				pullDownLabel.innerHTML = "Retrieving...";
+				pullDownIcon.className = "pullDownIcon loading";
+				pullDownAction();
+				
+		  }else if(clickToRefreshIcon.className.match("flip") && hasRefresh){
+		  	clickToRefreshIcon.className = "clickToRefreshIcon loading";
+			  touchToShowMore2.innerHTML = "Retrieving more...";
+		  	pullUpAction();
+		  }
+		  
+		  
+		}
+	});
+	
+	
+	
+	
+
+  buffCount = window.Android.getBufferCount();
+	
+	//initialize countries
+	$countries.empty();
+	var countries = window.Android.getCountries();
+	countryInJSON = JSON.parse(countries);
+	for(var key in countryInJSON){
+		console.log(">>>>>>>>>>"+key + ", "+countryInJSON[key]);
+		var tempOpt = countryOpts.replace(/@shortname/,key).replace(/@fullname/,countryInJSON[key]);
+		$countries.append(tempOpt);
+	}
+	
+	var lastSelected = window.Android.getLastSelectedCountry();
+	$countries.val(lastSelected);
+
+	
+	/*
+	$countries.easyDropDown({
+			wrapperClass: '',
+			onChange: function(selected){
+				console.log("onchange>>>>>>.");
+			}
+	});
+	*/
+	
+	
+	mytool.addEvent(mytool.$("countries"),"change",onCountryChange);
+	
+	//draw a pull fill round
+	var pullCanvas = mytool.$("pullButton");
+	var width = pullCanvas.parentNode.offsetWidth;
+  var height = pullCanvas.parentNode.offsetHeight;
+  pullCanvas.width = width;
+  pullCanvas.height = height;
+	var ct = pullCanvas.getContext("2d");
+	ct.beginPath();
+	ct.strokeStyle="black";
+	ct.lineWidth = 5;
+	var centerX = width/2;
+	var centerY = height/2;
+	ct.arc(centerX, centerY, centerX/2, 0, 2*Math.PI, false); //full circle
+  //ct.stroke();
+  var grd=ct.createRadialGradient(centerX,centerY,5,centerX,centerY,centerX/2);
+	grd.addColorStop(0,"white");
+	grd.addColorStop(1,"grey");
+  ct.fillStyle = grd;
+  ct.fill();
+  ct.closePath();
+	
+	//mytool.addEvent(touchToShowMore,"click",pullUpAction);
+	
+	
+	/*
+	var thelist = mytool.$("thelist");
+	var expandEach = function(e){
+		e = e || window.event;
+		var target = e.target || e.srcElement;
+		if(target.className.match("listhead")){
+			var content = target.parentNode.querySelector(".listchild");
+			if(content.className == "listchild collapse"){
+				content.className = "listchild expanded";
+			}else{
+				content.className = "listchild collapse";
+			}
+			var nextLi = $(target).next("li");
+			
+			alert(nextLi);
+			
+	  }
+	}
+	*/
+	
+	/*
+	$(function(){
+	$("li").find("ul").prev().click(function(){
+		$(this).next().toggle(100);
+	});
+	$("li:has(ul)").find("ul").hide();
+	});
+	*/
+  //mytool.addEvent(thelist,"click",expandEach);
+		
+	
+	
+}
+
+/**
+ * Handles the WebComponentsReady event. This event is fired when all
+ * custom elements have been registered and upgraded.
+ */
+function handleWebComponentsReady(event) {
+  document.body.style.opacity = "";
+  setTimeout(function() {
+    pageDeck.goToPage(pageDeck.getDefaultPage().id);
+  }, 0);
+  
+  
+  
+}
+       
+        
+var commentContent = mytool.$("comment-content");
+var header = mytool.$("header");
+mytool.addEvent(commentContent,"touchmove",function(e){
+	e.preventDefault();	   	
+},false);
+
+mytool.addEvent(header,"touchmove",function(e){
+	e.preventDefault();	   	
+},false);
+
+
+mytool.addEvent(window,"DOMContentLoaded",handleDomContentLoaded);
+mytool.addEvent(window,"WebComponentsReady",handleWebComponentsReady);
+        
+        
+
+})();
+      
+      
+      
+      
+    </script>
+  </body>
+
+</html>

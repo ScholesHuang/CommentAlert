@@ -1,0 +1,864 @@
+
+<!-- saved from url=(0074)https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxreadtemplate?lang=zh_CN&t=view -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript">
+document.domain = "qq.com";
+</script><script type="text/javascript">
+parent.getFileIcon = function(_asName){
+var Q= parent.jQuery;
+_asName = _asName.toLowerCase();
+if (Q.endsWith(_asName, ".bmp") || Q.endsWith(_asName, ".png") || Q.endsWith(_asName, ".jpg")
+|| Q.endsWith(_asName, ".jpeg") || Q.endsWith(_asName, ".gif")) {
+return "fileOfPhoto";
+
+} else if(Q.endsWith(_asName, ".doc") || Q.endsWith(_asName, ".docx") || Q.endsWith(_asName, ".wps")){
+return "fileOfWord";
+
+} else if (Q.endsWith(_asName, ".pdf")){
+return "fileOfPdf";
+
+} else if (Q.endsWith(_asName, ".ppt") || Q.endsWith(_asName, ".pptx")) {
+return "fileOfPowerPoint";
+
+} else if(Q.endsWith(_asName, ".xls") || Q.endsWith(_asName, ".xlsx")) {
+return "fileOfExcel";
+
+} else if (Q.endsWith(_asName, ".txt") || Q.endsWith(_asName, ".rtf")) {
+return "fileOfText";
+
+} else if(Q.endsWith(_asName, ".rar") || Q.endsWith(_asName, ".zip") || Q.endsWith(_asName, ".7z") 
+|| Q.endsWith(_asName, ".tar") || Q.endsWith(_asName, ".iso")) {
+return "fileOfZip";
+
+} else if(Q.endsWith(_asName, ".mp3") || Q.endsWith(_asName, ".wav") || Q.endsWith(_asName, ".amr")) {
+return "fileOfMusic";
+
+} else if(Q.endsWith(_asName, ".html") || Q.endsWith(_asName, ".htm")) {
+return "fileOfLink";
+} 
+
+return "";
+}
+</script><script type="text/html" id="chat_profile">
+<div class="myProfile">
+<img src="<#=avatar#>" un="avatar_<#=UserName#>" onerror="reLoadImg(this)" />
+<div class="avatar" id="accountAvatarWrapper" click="popupModifyAvatarWin" style="cursor:pointer;"></div>
+<a class="unreadTotalCount" id="unreadTotalCount" href="javascript:;" style="display:none;">0</a>
+    <div class="info">
+
+<span class="nickName"><#=name#></span>
+</div>
+<div class="operaterBox" style="display:none;" id="operaterBox">
+
+<div class="operaterBoxPanel">
+<a href="javascript:;" class="addFriends" click="createChatroom">
+<span class="iconPic left"></span>
+<span class="operaterBoxTitle left">发起聊天</span>
+<div class="clr"></div>
+</a>
+<#if(MMNotification.isSupport()){#>
+<a href="javascript:;" class="DesktopRemind" click="toggleNotify" tip="请先在浏览器设置中取消禁用桌面通知">
+<span class="iconPic <#if(!isNotifyOpen || MMNotification.checkPermission()!=0){#>iconPicDeskRem<#}#> left"></span>
+<span class="operaterBoxTitle left"><#if(!isNotifyOpen || MMNotification.checkPermission()!=0){#>桌面通知<#}else{#>关闭通知<#}#></span>
+<div class="clr"></div>
+</a><#}#>
+<a href="javascript:;" class="voiceCancel" click="toggleMute">
+<span class="iconPic <#if(isMute){#>iconPicVoice<#}#> left"></span>
+<span class="operaterBoxTitle left"><#if(isMute){#>开启声音<#}else{#>关闭声音<#}#></span>
+<div class="clr"></div>
+</a>
+    <a href="javascript:;" class="feedback" click="feedback">
+        <span class="iconPic iconFeedback left"></span>
+        <span class="operaterBoxTitle left">意见反馈</span>
+        <div class="clr"></div>
+    </a>
+    <a href="javascript:;" class="iconLogout" url="/cgi-bin/mmwebwx-bin/webwxlogout" click="logout">
+<span class="iconPic iconPicLogout left"></span>
+<span class="operaterBoxTitle left">退出</span>
+<div class="clr"></div>
+</a>
+</div>
+
+</div>
+<a href="javascript:;" class="iconOperater" click="toggleSysMenu"></a>
+</div>
+<div class="clr"></div>
+</script><script type="text/html" id="chat_operaterBoxPanel">
+<div class="operaterBoxPanel">
+<a href="javascript:;" class="addFriends" click="createChatroom">
+<span class="iconPic left"></span>
+<span class="operaterBoxTitle left">发起聊天</span>
+<div class="clr"></div>
+</a>
+<#if(MMNotification.isSupport()){#>
+<a href="javascript:;" class="DesktopRemind" click="toggleNotify" tip="请先在浏览器设置中取消禁用桌面通知">
+<span class="iconPic <#if(!isNotifyOpen || MMNotification.checkPermission()!=0){#>iconPicDeskRem<#}#> left"></span>
+<span class="operaterBoxTitle left"><#if(!isNotifyOpen || MMNotification.checkPermission()!=0){#>桌面通知<#}else{#>关闭通知<#}#></span>
+<div class="clr"></div>
+</a><#}#>
+<a href="javascript:;" class="voiceCancel" click="toggleMute">
+<span class="iconPic <#if(isMute){#>iconPicVoice<#}#> left"></span>
+<span class="operaterBoxTitle left"><#if(isMute){#>开启声音<#}else{#>关闭声音<#}#></span>
+<div class="clr"></div>
+</a>
+    <a href="javascript:;" class="feedback" click="feedback">
+        <span class="iconPic iconFeedback left"></span>
+        <span class="operaterBoxTitle left">意见反馈</span>
+        <div class="clr"></div>
+    </a>
+    <a href="javascript:;" class="iconLogout" url="/cgi-bin/mmwebwx-bin/webwxlogout" click="logout">
+<span class="iconPic iconPicLogout left"></span>
+<span class="operaterBoxTitle left">退出</span>
+<div class="clr"></div>
+</a>
+</div>
+</script><script type="text/html" id="chat_conversationItem">
+<#if(invisible && !window._has_load_more_sign_){#>
+<div id="conv_load_more" click="loadMoreConv">
+<a class="chatListColumn loadMoreConv" href="javascript:;" >
+<span class="tipPic"></span>
+<span class="desc">点击显示更多</span>
+</a>
+</div>
+<#window._has_load_more_sign_=true;#>
+<#}#>
+<div class="chatListColumn" onclick="WebMM.chooseConversation(this)" un="<#=userName#>" userName="<#=userName#>" id="conv_<#=jQuery.getAsciiStr(userName)#>" <#if(invisible){#>style="display:none;"<#}#> >
+<div class="clicked" style="display:none;"></div>
+
+  <span class="unreadDot" style="<#if(!unread){#>display:none<#}#>"><#=unread#></span>
+  <span class="unreadDotS" style="display:none"></span>
+<div class="avatar_wrap"><img class="avatar" <#if(invisible){#>hide_src="<#=avatar#>" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif"<#}else{#>src="<#=avatar#>"<#}#> onerror="reLoadImg(this)" click1="showProfile@.chatListColumn"/></div>
+<div class="extend">
+<p class="time"><#=time#></p>
+    <div class="edited"><i class="editedIcon"></i></div>
+<div class="mute" style="<#if(!muted){#>display:none;<#}#>"></div>
+</div>
+<div class="info">
+<div class="nickName"><div class="left name" style=""><#=name#></div><#if(isRoom){#><div class="personNum left">(<#=memCount#>)</div><#}#><div class="clr"></div></div>
+<div class="descWrapper">
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" class="tipIcon iconSendFailed sendFailedStatus" style="<#if(status==5){#>display:inline;<#}else{#>display:none;<#}#>"/>
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" class="tipIcon iconSending sendingStatus hide"/>
+<p class="desc"><#=digest#></p>
+</div>
+</div>
+<div class="clr"></div>
+</div>
+</script><script type="text/html" id="chat_conversationList">
+<#window._has_load_more_sign_=false;#>
+<#if(list.length>0){#>
+<#for(var i=0,len=list.length; i<len; i++){var item = list[i]; with(item){#>
+
+<#if(invisible && !window._has_load_more_sign_){#>
+<div id="conv_load_more" click="loadMoreConv">
+<a class="chatListColumn loadMoreConv" href="javascript:;" >
+<span class="tipPic"></span>
+<span class="desc">点击显示更多</span>
+</a>
+</div>
+<#window._has_load_more_sign_=true;#>
+<#}#>
+<div class="chatListColumn" onclick="WebMM.chooseConversation(this)" un="<#=userName#>" userName="<#=userName#>" id="conv_<#=jQuery.getAsciiStr(userName)#>" <#if(invisible){#>style="display:none;"<#}#> >
+<div class="clicked" style="display:none;"></div>
+
+  <span class="unreadDot" style="<#if(!unread){#>display:none<#}#>"><#=unread#></span>
+  <span class="unreadDotS" style="display:none"></span>
+<div class="avatar_wrap"><img class="avatar" <#if(invisible){#>hide_src="<#=avatar#>" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif"<#}else{#>src="<#=avatar#>"<#}#> onerror="reLoadImg(this)" click1="showProfile@.chatListColumn"/></div>
+<div class="extend">
+<p class="time"><#=time#></p>
+    <div class="edited"><i class="editedIcon"></i></div>
+<div class="mute" style="<#if(!muted){#>display:none;<#}#>"></div>
+</div>
+<div class="info">
+<div class="nickName"><div class="left name" style=""><#=name#></div><#if(isRoom){#><div class="personNum left">(<#=memCount#>)</div><#}#><div class="clr"></div></div>
+<div class="descWrapper">
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" class="tipIcon iconSendFailed sendFailedStatus" style="<#if(status==5){#>display:inline;<#}else{#>display:none;<#}#>"/>
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" class="tipIcon iconSending sendingStatus hide"/>
+<p class="desc"><#=digest#></p>
+</div>
+</div>
+<div class="clr"></div>
+</div>
+
+<#}}#>
+<#}else{#>
+<div class="listDesc">
+<#if(filter.length == 0){#>
+最近没有聊天记录
+<#}else{#>
+找不到匹配的聊天记录
+<#}#>
+</div>
+<#}#>
+</script><script type="text/html" id="chat_conversationList_loadMore">
+<div>
+<a class="chatListColumn loadMoreConv" href="javascript:;" click="loadMoreConv">
+<span class="tipPic"></span>
+<span class="desc">点击显示更多</span>
+</a>
+</div>
+</script><script type="text/html" id="contactItem">
+<a class="friendDetail" click="showProfile" id="con_item_<#=jQuery.getAsciiStr(contact.UserName)#>" userName="<#=contact.UserName#>">
+<span class="avatar" mouseover1="showProfile@.friendDetail"><img <#if(this.invisible){#>hide_src="<#=contact.avatar#>" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif"<#}else{#>src="<#=contact.avatar#>"<#}#> onerror="reLoadImg(this)" /></span>
+<div class="nickName"><div class="left name" style=""><#=contact.DisplayName#></div><div class="clr"></div></div>
+<span class="clr"></span>
+</a>
+</script><script type="text/html" id="contactlist">
+<#if(starContacts.length>0){#>
+<div class="groupTitle starFriendsTitle">
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" class="iconFavoriteFriend" />
+星标朋友
+</div>
+<div class="groupDetail">
+<#for(var i=0, len=starContacts.length; i<len; i++){var contact=starContacts[i];#>
+
+<a class="friendDetail" click="showProfile" id="con_item_<#=jQuery.getAsciiStr(contact.UserName)#>" userName="<#=contact.UserName#>">
+<span class="avatar" mouseover1="showProfile@.friendDetail"><img <#if(this.invisible){#>hide_src="<#=contact.avatar#>" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif"<#}else{#>src="<#=contact.avatar#>"<#}#> onerror="reLoadImg(this)" /></span>
+<div class="nickName"><div class="left name" style=""><#=contact.DisplayName#></div><div class="clr"></div></div>
+<span class="clr"></span>
+</a>
+
+<#}#>
+</div>
+<#}#>
+
+<#if(roomContacts.length>0){#>
+<#if(!isSearch){#>
+<div class="groupTitle">
+&nbsp;群组
+</div>
+<#}#>
+<div class="groupDetail">
+<#for(var i=0, len=roomContacts.length; i<len; i++){var contact=roomContacts[i];#>
+
+<a class="friendDetail" click="showProfile" id="con_item_<#=jQuery.getAsciiStr(contact.UserName)#>" userName="<#=contact.UserName#>">
+<span class="avatar" mouseover1="showProfile@.friendDetail"><img <#if(this.invisible){#>hide_src="<#=contact.avatar#>" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif"<#}else{#>src="<#=contact.avatar#>"<#}#> onerror="reLoadImg(this)" /></span>
+<div class="nickName"><div class="left name" style=""><#=contact.DisplayName#></div><div class="clr"></div></div>
+<span class="clr"></span>
+</a>
+
+<#}#>
+</div>
+<#}#>
+
+<#if(brandContacts.length>0/* && !WebMM.model("account").isHigherVer()*/){#>
+<a href="javascript:;" class="groupTitle pointer" click="toggleBrandList">
+<span class="left">&nbsp;公众帐号</span>
+<span class="lapIcon right"></span>
+<div class="clr"></div>
+</a>
+<div class="groupDetail" style="display:none;">
+<#for(var i=0, len=brandContacts.length; i<len; i++){var contact=brandContacts[i];#>
+
+<a class="friendDetail" click="showProfile" id="con_item_<#=jQuery.getAsciiStr(contact.UserName)#>" userName="<#=contact.UserName#>">
+<span class="avatar" mouseover1="showProfile@.friendDetail"><img <#if(this.invisible){#>hide_src="<#=contact.avatar#>" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif"<#}else{#>src="<#=contact.avatar#>"<#}#> onerror="reLoadImg(this)" /></span>
+<div class="nickName"><div class="left name" style=""><#=contact.DisplayName#></div><div class="clr"></div></div>
+<span class="clr"></span>
+</a>
+
+<#}#>
+</div>
+<#}#>
+
+
+<#if(contacts.length>0){#>
+<div class="groupDetail">
+<#var curC = "";#>
+<#for(var i=0, len=contacts.length; i<len; i++){var contact=contacts[i];#>
+<#if(!isSearch && (!curC || curC!=contact.orderC.charAt(0))){curC = contact.orderC.charAt(0);#>
+<div class="groupTitle">
+<span class="groupTitleLetter">
+<#if(curC=='~'){#>#<#}else{#><#=curC#><#}#>
+</span>
+</div>
+<#}#>
+
+<a class="friendDetail" click="showProfile" id="con_item_<#=jQuery.getAsciiStr(contact.UserName)#>" userName="<#=contact.UserName#>">
+<span class="avatar" mouseover1="showProfile@.friendDetail"><img <#if(this.invisible){#>hide_src="<#=contact.avatar#>" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif"<#}else{#>src="<#=contact.avatar#>"<#}#> onerror="reLoadImg(this)" /></span>
+<div class="nickName"><div class="left name" style=""><#=contact.DisplayName#></div><div class="clr"></div></div>
+<span class="clr"></span>
+</a>
+
+<#}#> 
+</div>
+
+<#}else if(starContacts.length==0 && brandContacts.length==0 && roomContacts.length==0 && contacts.length==0){#>
+<div style="padding:20px 0;">
+<span>找不到匹配的联系人</span>
+</div>
+
+<#}else if(init){#>
+<div style="text-align:center;">
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/ico_loading117ced3.gif" style="vertical-align:middle;" />
+<span>正在获取联系人列表...</span>
+</div>
+<#}#>
+</script><script type="text/html" id="chatroomlist">
+<#if(contacts.length>0){#>
+<div class="groupDetail activeColumn">
+<#for(var i=0, len=contacts.length; i<len; i++){var contact=contacts[i];#>
+<a class="friendDetail" click="enterSession" userName="<#=contact.UserName#>">
+<span class="avatar"><img src="<#=contact.avatar#>" onerror="reLoadImg(this)" /></span>
+<div class="nickName"><div class="left name" style=""><#=contact.DisplayName#></div><div class="clr"></div></div>
+<span class="clr"></span>
+</a>
+<#}#> 
+</div>
+
+<#}else{#>
+<div style="text-align:center;">
+<span>暂无群组联系人</span>
+</div>
+<#}#>
+</script><script type="text/html" id="newchatlist">
+<#if(starContacts.length>0){#>
+<div class="groupTitle starFriendsTitle">
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" class="iconFavoriteFriend" />
+星标朋友
+</div>
+<div class="groupDetail activeColumn">
+<#for(var i=0, len=starContacts.length; i<len; i++){var contact=starContacts[i];#>
+<a class="friendDetail" click="selectContact" id="sel_con_<#=jQuery.getAsciiStr(contact.UserName)#>">
+<span class="checkbox <#if(contact.choosed){#>checked<#}#>" username="<#=contact.UserName#>" ><img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" /></span>
+
+<span class="avatar"><img src="<#=contact.avatar#>" onerror="reLoadImg(this)" /></span>
+
+<span class="nickName"><#=contact.DisplayName#></span>
+<span class="clr"></span>
+</a>
+<#}#>
+</div>
+<#}#>
+
+<#if(contacts.length>0){#>
+<div class="groupTitle" <#if(starContacts.length==0){#>display:none;<#}#> >&nbsp;联系人</div>
+<div class="groupDetail activeColumn">
+<#for(var i=0, len=contacts.length; i<len; i++){var contact=contacts[i];#>
+
+<a class="friendDetail" click="selectContact" id="sel_con_<#=jQuery.getAsciiStr(contact.UserName)#>">
+<span class="checkbox <#if(contact.choosed){#>checked<#}#>" username="<#=contact.UserName#>" ><img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" /></span>
+
+<span class="avatar"><img src="<#=contact.avatar#>" onerror="reLoadImg(this)" /></span>
+
+<span class="nickName"><#=contact.DisplayName#></span>
+<span class="clr"></span>
+</a>
+
+<#}#> 
+</div>
+
+<#}else if(init){#>
+<div style="text-align:center;">
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/ico_loading117ced3.gif" style="vertical-align:middle;" />
+<span>正在获取联系人列表...</span>
+</div>
+<#}#>
+</script><script type="text/html" id="selectcontactlist">
+<#if(this.length>0){#>
+<#for(var i=0, len=this.length; i<len; i++){var contact=this[i];#>
+<span title="<#=jQuery.htmlEncode(jQuery.clearHtmlStr(contact.DisplayName))#>">
+<a class="iconRemove" href="javascript:;" click="unSelectContact" username="<#=contact.UserName#>"></a>
+<img src="<#=contact.HeadImgUrl#>" onerror="reLoadImg(this)" class="avatar" />
+</span>
+<#}#>
+
+<#}#>
+</script><script type="text/html" id="chat_conversationLoading">
+<div class="listDesc">
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/ico_loading117ced3.gif" style="vertical-align:middle;" />
+<span>正在获取最近的聊天...</span>
+</div>
+</script><script type="text/html" id="chat_chatmsglist">
+<#if(this.length == 0 || this.length==1&&this[0].MsgType==-9999){#>
+<div id="noMsgTip" class="noMsgIip">
+<div class="noMsgTipPic"></div>
+<p>暂时没有新消息</p>
+</div>
+<#} else if(this.length > 0){#>
+<#for(var i=0, len=this.length; i<len; i++){with(this[i]){#>
+   <#if(MsgType!=10000 && MsgType!=-9999){#>
+   <div class="chatItem <#if(isSend){#>me<#}else{#>you<#}#>" un="item_<#=LocalID#>">
+<#if(this[i].time){#>
+<div class="time">
+<span class="timeBg left"></span>
+<#=time#>
+<span class="timeBg right"></span>
+</div>
+<#}#> 
+<#if(MsgType==WebMM.Constants.MM_DATA_READER_TYPE){#>
+<#if(Object.category.count==1){#><!--media mesg content--><div class="media mediaFullText"><a href="<#=Object.category.item.url#>" style="text-decoration: none;" target="_blank"><div class="mediaPanel"><div class="mediaHead"><span class="title left"><#=WebMM.widget.afterHTMLEncodeEmoji(Object.category.item&&Object.category.item.title)#></span><span class="time right"><#=jQuery.formatDate(Object.category.item.pub_time * 1000, "MM-DD")#></span><div class="clr"></div></div><#if(Object.category.item.cover){#><div class="mediaImg"><#if(jQuery.browser.msie){#><img src="/cgi-bin/mmwebwx-bin/webwxgetpubliclinkimg?url=<#=encodeURIComponent(Object.category.item.cover)#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>" style="visibility:hidden;" onload="jQuery.genImgCentralStyle(this);" /><#}else{#><img src="<#=Object.category.item.cover#>" style="visibility:hidden;" onload="jQuery.genImgCentralStyle(this);" /><#}#></div><#}#><div class="mediaContent mediaContentP"><p><#=WebMM.widget.afterHTMLEncodeEmoji(Object.category.item.digest)#></p></div><div class="mediaFooter"><a href="<#=Object.category.item.url#>" style="text-decoration: none;" target="_blank"><span class="mesgIcon left"></span><span class="left" style="line-height:39px;">查看全文</span><div class="clr"></div></a></div></div></a></div><#}else{#><!--media mesg--><div class="media"><div class="mediaPanel"><a href="<#=Object.category.item[0].url#>" target="_blank"><div class="mediaImg"><div class="mediaImgPanel"><#if(jQuery.browser.msie){#><img src="/cgi-bin/mmwebwx-bin/webwxgetpubliclinkimg?url=<#=encodeURIComponent(Object.category.item[0].cover)#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>"  style="visibility:hidden;" onload="jQuery.genImgCentralStyle(this);"/><#}else{#><img src="<#=Object.category.item[0].cover#>"  style="visibility:hidden;" onload="jQuery.genImgCentralStyle(this);"/><#}#></div><div class="mediaImgFooter"><p class="mesgTitleTitle left"><#=Object.category&&Object.category.item[0]&&Object.category.item[0].title#></p><div class="clr"></div></div></div></a><div class="mediaContent"><#for(var j=1; j<Object.category.item.length; j++){#><a href="<#=Object.category.item[j].url#>" target="_blank"><div class="mediaMesg"><span class="mediaMesgDot"></span><div class="mediaMesgTitle left"><p class="left"><#=Object.category&&Object.category.item[j]&&Object.category.item[j].title#></p><div class="clr"></div></div><div class="mediaMesgIcon right"><#if(jQuery.browser.msie){#><img src="/cgi-bin/mmwebwx-bin/webwxgetpubliclinkimg?url=<#=encodeURIComponent(Object.category.item[j].cover)#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>" /><#}else{#><img src="<#=Object.category.item[j].cover#>"/><#}#></div><div class="clr"></div></div></a><#}#></div></div></div><#}#>
+<#}else if(MsgType > WebMM.Constants.MM_DATA_READER_TYPE){#>
+<div class="chatItemContent"><img class="avatar" onerror="reLoadImg(this)" src="<#=this[i].avatar#>" un="avatar_<#=this[i].avatarId#>" title="<#=this[i].avatarTitle#>"   <#if(!isSend){#> click="showProfile" userName="<#=actualSender#>" <#}#>  />    <#if(typeof(isChatRoom)!='undefined'&&isChatRoom==1&&typeof(DisplayName)!='undefined'&&DisplayName){#>        <div class="name"><#=DisplayName#></div>    <#}#><div class="cloud <#if(MsgType!=WebMM.Constants.MM_DATA_APP_MSG_EMOJI_TYPE)#>cloudMesg <#if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_TEXT_TYPE){#>cloudMesgWord<#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_AUDIO_TYPE||MsgType==WebMM.Constants.MM_DATA_APP_MSG_VIDEO_TYPE||MsgType==WebMM.Constants.MM_DATA_APP_MSG_URL_TYPE){#>cloudMesgLink<#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_IMG_TYPE){#>cloudMesgImg<#}else if(MsgType!=WebMM.Constants.MM_DATA_APP_MSG_EMOJI_TYPE){#>cloudMesgFile<#}#>" un="cloud_<#=MsgId#>" msgid="<#=MsgId#>"><div class="cloudPannel" style=""><div class="cloudBody"><div class="<#if(MsgType!=WebMM.Constants.MM_DATA_APP_MSG_EMOJI_TYPE){#>cloudContent left<#}#>"><#if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_TEXT_TYPE){#> <!-- app text --><div class="cloudMesgPanel"><div class="cloudMesgWordPanel"><p><#=Object.appmsg&&Object.appmsg.title#></p></div></div><#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_IMG_TYPE){#> <!-- app img--><div class="cloudMesgPanel"><div class="cloudMesgWordPanel"><img class="zoomIn imageBorder" msgid="<#=MsgId#>" click="popImg" onerror="reLoadImg(this)" src="<#if(Object.appmsg.url){#>/cgi-bin/mmwebwx-bin/webwxgetpubliclinkimg?url=<#=encodeURIComponent(Object.appmsg.url)#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#><#}else{#>/cgi-bin/mmwebwx-bin/webwxgetmsgimg?type=slave&MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#><#}#>" rawSrc="<#if(Object.appmsg.url){#>/cgi-bin/mmwebwx-bin/webwxgetpubliclinkimg?url=<#=encodeURIComponent(Object.appmsg.url)#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#><#}else{#>/cgi-bin/mmwebwx-bin/webwxgetmsgimg?MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#><#}#>" /></div></div><#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_AUDIO_TYPE){#> <!-- app audio --><div class="cloudMesgPanel"><a href="<#=Object.appmsg.url#>" target="_blank"><div class="cloudMesgLinkFilePanel"><img class="cloudMesgIcon left" onerror="reLoadImg(this)" src="/cgi-bin/mmwebwx-bin/webwxgetmsgimg?type=slave&MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>"/><div class="cloudMesgContent left"><p><#=Object.appmsg&&Object.appmsg.title#></p><span><#=Object.appmsg.des#></span></div><div class="clr"></div></div></a></div><#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_VIDEO_TYPE){#> <!-- app video --><div class="cloudMesgPanel"><a href="<#=Object.appmsg.url#>" target="_blank"><div class="cloudMesgLinkFilePanel"><img class="cloudMesgIcon left" onerror="reLoadImg(this)" src="/cgi-bin/mmwebwx-bin/webwxgetmsgimg?type=slave&MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>"/><div class="cloudMesgContent left"><p><#=Object.appmsg&&Object.appmsg.title#></p><span><#=Object.appmsg.des#></span></div><div class="clr"></div></div></a></div><#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_URL_TYPE){#> <!-- app url --><div class="cloudMesgPanel"><a href="<#=Object.appmsg.url#>" target="_blank"><div class="cloudMesgLinkFilePanel"><img class="cloudMesgIcon left" onerror="reLoadImg(this)" src="/cgi-bin/mmwebwx-bin/webwxgetmsgimg?type=slave&MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>"/><div class="cloudMesgContent left"><p><#=Object.appmsg&&Object.appmsg.title#></p><span><#=Object.appmsg.des#></span></div><div class="clr"></div></div></a></div><#}else if(MsgType==49){#><!--app attach--><div class="file"><a click="downloadMedia" href="javascript:;" url="<#if(this[i].MediaId){#>http://file2.wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetmedia?sender=<#=this[i].FromUserName#>&mediaid=<#=this[i].MediaId#>&filename=<#=encodeURIComponent(this[i].FileName)#><#}else{#>javascript:;<#}#>"><img onerror="reLoadImg(this)" src="<#=window.getFileIcon(this[i].FileName)#>" class="icon"><div class="info"><p class="name"><#=this[i].FileName#></p><p class="desc"><#=$.getSizeDesc(FileSize)#></p><div class="clr"></div></div><div class="clr"></div></a></div><#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_ATTACH_TYPE){#><!--app attach--><div class="file <#=window.getFileIcon(this[i].FileName)#>"><a click="downloadMedia" href="javascript:;" url="<#if(Object.appmsg.appattach.attachid){#>http://file2.wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetmedia?sender=<#=this[i].FromUserName#>&mediaid=<#=Object.appmsg.appattach.attachid#>&filename=<#=encodeURIComponent(Object.appmsg&&Object.appmsg.title)#><#}else{#>javascript:;<#}#>"><div class="left fileIcon"><span class="fileImg"></span></div><div class="info left"><p class="name"><#=Object.appmsg&&Object.appmsg.title#></p><p class="desc"><#=$.getSizeDesc(Object.appmsg.appattach.totallen)#></p><div class="clr"></div></div><div class="clr"></div></a></div><#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_OPEN_TYPE){#> <!-- app open--><div class="cloudMesgPanel"><a href="<#=Object.appmsg.url#>" target="_blank"><div class="cloudMesgLinkFilePanel"><img class="cloudMesgIcon left" onerror="reLoadImg(this)" src="/cgi-bin/mmwebwx-bin/webwxgetmsgimg?type=slave&MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>"/><div class="cloudMesgContent left"><p><#=Object.appmsg&&Object.appmsg.title#></p><span><#=Object.appmsg.des#></span></div><div class="clr"></div></div></a></div><#}else if(MsgType==WebMM.Constants.MM_DATA_APP_MSG_EMOJI_TYPE){#> <!-- app emoji--><div class=""><div class="cloudMesgAppEmojiPanel"><img class="cloudMesgIcon" onerror="reLoadImg(this)" src="/cgi-bin/mmwebwx-bin/webwxgetmsgimg?type=big&MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>" style="max-width:100px;"></div></div><#}#></div><div class="clr"></div></div><div class="cloudArrow"></div></div></div></div>
+<#}else if(MsgType == WebMM.Constants.MM_DATA_VERIFYMSG || MsgType == WebMM.Constants.MM_DATA_SHARECARD || MsgType == WebMM.Constants.MM_DATA_POSSIBLEFRIEND_MSG){#>
+<div class="chatItemContent"><#if(FromUserName!="fmessage"){#><img class="avatar" onerror="reLoadImg(this)" src="<#=avatar#>" un="avatar_<#=avatarId#>" title="<#=avatarTitle#>"   <#if(!isSend){#> userName="<#=actualSender#>" click="showProfile" <#}#>  />    <#if(typeof(isChatRoom)!='undefined'&&isChatRoom==1&&typeof(DisplayName)!='undefined'&&DisplayName){#>        <div class="name"><#=DisplayName#></div>    <#}#><div class="cloud callingCard haveAvatarCard"><#} else {#><div class="cloud callingCard"><#}#> <div class="cloudPannel" style="cursor:pointer;" click="popupMsgProfile" username="<#=Contact.UserName#>" msgId="<#=MsgId#>"><div class="cloudBody"><div class="cloudContent"> <div class="header" style="">  </div> <div class="content"> <img class="friendImg left" onerror="reLoadImg(this)" src="/cgi-bin/mmwebwx-bin/webwxgeticon?skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>&username=<#=Contact.UserName#>&msgid=<#=MsgId#>"> <div class="friendMesg left"> <span class="nickname"><#=Contact.NickName||Contact.Alias||Contact.UserName#></span><#if(MsgType==WebMM.Constants.MM_DATA_VERIFYMSG){#><#if(Contact.Content){#><p title="<#=Contact.Content#>"><#=Contact.Content#></p><#}else{#> <p>对方请求添加你为朋友</p><#}#><#}else if(MsgType==WebMM.Constants.MM_DATA_SHARECARD && ((Contact.Alias =="" && !(/^wxid_/.test(Contact.UserName))) || Contact.Alias !="")){#> <p><#=Contact.Alias||Contact.UserName#></p><#}else if (Contact.Scene==4||Contact.Scene==1){#> <p>QQ好友：<#if(Contact.QQNum){#><#=Contact.QQNum#><#}#></p><#}else{#> <p><#if(Contact.Content){#><#=Contact.Content#><#}#></p><#}#> </div> <div class="clr"></div> </div> <div class="footer"> <span class="left <#if(MsgType!=WebMM.Constants.MM_DATA_SHARECARD){#>callingCardIcon <#}#> <#if(MsgType==WebMM.Constants.MM_DATA_SHARECARD)#><#else if(MsgType==WebMM.Constants.MM_DATA_VERIFYMSG){#><#if(Contact.Scene==30){#>friendScanIcon<#}else if(Contact.Scene==18){#>friendAroundIcon<#}else if(Contact.Scene==25){#>bottleIcon<#}else if(Contact.Scene>=22&&Contact.Scene<=29){#>friendShakeIcon<#}#><#}else{#><#if(Contact.Scene==4||Contact.Scene==1){#>qqIcon<#}else if(Contact.Scene==10){#>addresIcon<#}else if(Contact.Scene==31){#>facebookIcon<#}else{#><#}#><#}#>"> </span>   <span class="left"><#if(MsgType==WebMM.Constants.MM_DATA_SHARECARD)#>名片<#else if(MsgType==WebMM.Constants.MM_DATA_VERIFYMSG){#><#if(Contact.Scene==30){#>通过扫一扫向你打招呼<#}else if(Contact.Scene==18){#>附近的人向你打招呼<#}else if(Contact.Scene==25){#>漂流瓶的朋友向你打招呼<#}else if(Contact.Scene>=22&&Contact.Scene<=29){#>摇一摇的朋友向你打招呼<#}else{#>朋友验证请求<#}#><#}else{#><#if(Contact.Scene==4||Contact.Scene==1){#>QQ好友<#}else if(Contact.Scene==10){#>通讯录朋友<#}else if(Contact.Scene==31){#>Facebook朋友<#}else{#>可能认识的人<#}#><#}#></span><#var _oConatct = WebMM.model("contact").getContact(Contact.UserName);if(!_oConatct||!_oConatct.isContact()){#> <a class="right btnBlue"> <div class="btnBluePanel"> <span class="left addIcon"></span> <span class="left btnWord">添加</span> <div class="clr"></div> </div> </a><#}else{#> <a class="right btnGrayAdded"> <div class="btnPanel"> <span class="left btnWord">已添加</span><div class="clr"></div></div> </a><#}#> <div class="clr"></div> </div> </div> </div> <div <#if(Contact.Scene==17){#>style="display:none;"<#}#> class="cloudArrow"></div> </div> </div></div>
+<#}else{#>
+<div class="chatItemContent">
+<img class="avatar" src="<#=this[i].avatar#>" onerror="reLoadImg(this)" un="avatar_<#=this[i].avatarId#>" title="<#=this[i].avatarTitle#>"  click="showProfile" userName="<#=actualSender#>"  />
+<#if(typeof(isChatRoom)!='undefined'&&isChatRoom==1&&typeof(DisplayName)!='undefined'&&DisplayName){#>
+<div class="name"><#=DisplayName#></div>
+<#}#>
+<div class="cloud <#if(MsgType==3){#>cloudImg<#}else if(MsgType==34){#>cloudVoice<#}else if(MsgType==43){#>cloudVideo<#}else if(MsgType==49 || MsgType==WebMM.Constants.MM_DATA_READER_TYPE){#>cloudImg<#}else if(MsgType!=47){#>cloudText<#}#>" un="cloud_<#=MsgId#>" msgid="<#=MsgId#>" <#if(MsgType==34){#>click="playVoice"<#}else if(MsgType==43){#>click="playVideo"<#}#> <#if(MsgType==34){#>style="width:<#=$.computeVoiceNodeWidth(VoiceLength)#>px"<#}#>  >
+<div class="cloudPannel" style="">
+<div class="sendStatus">
+<#if(MsgType==34&&Status!=1){#> <!--voice-->
+<#if(Status==WebMM.Constants.STATE_REACH){#>
+<img class="unread" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" un="unread_<#=MsgId#>"/>
+<#}#>
+<span class="second"><#=Math.round(VoiceLength/1000)#>"</span>
+<#if(ForwardFlag == 1){#>
+<em class="replyVoice">转发了一条语音</em>
+<#}#>
+<#}else if(MsgType!=3&&MsgType!=49&&Status==1){#>
+<img class="loadingPic" src="https://res.wx.qq.com/zh_CN/htmledition/images/ico_loading117ced3.gif" style="vertical-align:middle;" />
+<#}else if(Status==5 && MsgType==1){#>
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" class="iconSendFailed" style="vertical-align:middle; cursor: pointer;" click="resendMsg@.cloudText" title="重新发送"/>
+    <#}else if(Status==5){#>
+                    <img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" class="iconSendFailed" style="vertical-align:middle;"/>
+<#}else if(MsgType!=1&&MsgType!=3&&MsgType!=34&&MsgType!=37&&MsgType!=43&&MsgType!=49&&MsgType!=47&&MsgType!=62&&MsgType!=10000){#>
+<span type="vertical-align:middle;"><#=WebMM.getRes("text_msg_unsupport")#></span>
+<#}#>
+
+</div>
+<div class="<#if(MsgType!=49){#>cloudBody<#}#>">
+<div class="<#if(MsgType!=47&&MsgType!=49){#>cloudContent<#}#>">
+<#if(MsgType==3){#> <!--img msg-->
+<#if(LocalID==MsgId && Status==1){
+                                        if(this[i].FileUrl){#>
+        <span class="img_wrap"><img class="zoomIn imageBorder" click="popImg" style="width:100px" src="<#=this[i].FileUrl#>" onerror="reLoadImg(this)" rawSrc="<#=this[i].FileUrl#>" msgid="<#=MsgId#>"/></span>
+                                    <#}else{#>
+                                        <img class="imageBorder" src="https://res.wx.qq.com/zh_CN/htmledition/images/photo_loading17ced3.png" onerror="reLoadImg(this)" />
+                                    <#}#>
+<#}else{
+                                        if(this[i].FileUrl){#>
+                                            <span class="img_wrap"><img class="zoomIn imageBorder" click="popImg" style="width:100px" src="<#=this[i].FileUrl#>" onerror="reLoadImg(this)" rawSrc="<#=this[i].FileUrl#>" msgid="<#=MsgId#>"/></span>
+                                    <#}else{#>
+    <span class="img_wrap"><img class="zoomIn imageBorder" src="/cgi-bin/mmwebwx-bin/webwxgetmsgimg?type=slave&MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>" click="popImg" rawSrc="/cgi-bin/mmwebwx-bin/webwxgetmsgimg?MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>" onload="WebMM.widget.preLoadImg('/cgi-bin/mmwebwx-bin/webwxgetmsgimg?MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>');" onerror="reLoadImg(this)" msgid="<#=MsgId#>"/></span>
+                                    <#}#>
+<#}#>
+<#}else if(MsgType==34){#><!--voice msg -->
+<span class="icoVoice" un="voiceStatus"></span>
+<#}else if(MsgType==43){#><!--video msg-->
+<img class="imageBorder" src="/cgi-bin/mmwebwx-bin/webwxgetmsgimg?type=slave&MsgID=<#=MsgId#>&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>" onerror="reLoadImg(this)" style="height:100px;width:100px;" title="点击播放视频"/>
+<span class="wx_ico_video" title="点击播放视频"></span>
+<div class="wx_video_duration"><#=PlayLength#>&nbsp;"</div>
+<#}else if(MsgType==49){#><!--app msg-->
+<div class="file <#=window.getFileIcon(this[i].FileName)#>">
+<a click="downloadMedia" href="javascript:;" url="<#if(this[i].MediaId){#>http://file2.wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetmedia?sender=<#=this[i].FromUserName#>&mediaid=<#=this[i].MediaId#>&filename=<#=encodeURIComponent(this[i].FileName)#>&msgid=<#=this[i].MsgId#><#}else{#>javascript:;<#}#>">
+<div class="left fileIcon">
+<span class="fileImg"></span>
+</div>
+<!--<img src="<#=window.getFileIcon(this[i].FileName)#>" onerror="reLoadImg(this)" class="icon">-->
+<div class="info left">
+<p class="name"><#=this[i].FileName#></p>
+<p class="desc"><#=$.getSizeDesc(FileSize)#></p>
+<div class="fileLoad right" style="visibility:hidden;">
+<div class="fileLoadPanel">
+<div class="progrBar" id="progressBar_<#=LocalID#>"></div>
+</div>
+</div>
+</div>
+<div class="clr"></div>
+</a>
+</div>
+                            <#}else if(MsgType==47){#> <!--custom emoji-->
+<div style="min-height: 100px;">
+                                    <img class="customEmoji" src="<#=NewContent#>" onerror="reLoadImg(this)" />
+</div>
+                            <#}else{#>
+                                <pre style="white-space:pre-wrap"><#=this[i].actualContent#></pre>
+<#}#>
+</div>
+
+</div>
+<div class="cloudArrow <#if(MsgType==49){#>cloudFileArrow<#}#>"></div>
+<#if(MsgType==3 && Status==1){#>
+<div class="cloudImgLoad">
+<div class="fileLoad" style="visibility:hidden;">
+<div class="fileLoadPanel">
+<div class="progrBar" id="progressBar_<#=LocalID#>"></div>
+</div>
+</div>
+</div>
+<#}#>
+</div>
+
+</div>
+
+</div>
+
+<#}#>
+</div>
+<#}else if(MsgType==10000){#>
+<div class="chatItem you">
+<div class="systemTip" >
+<span><#=Content#></span>
+</div>
+</div>
+<#}#>
+<#}}#>
+<#}#>
+</script><script type="text/html" id="nouser">
+<div class="chatItem you" <#if(this[i].ContinueFlag===0){#>style="display:none;"<#}#> >
+<div class="systemTip" >
+<div un="loading" <#if(Status!=WebMM.Constants.STATE_SENDING){#>style="display:none;"<#}#> >
+<img src="https://res.wx.qq.com/zh_CN/htmledition/images/ico_loading117ced3.gif" />
+<div>加载中...</div>
+</div>
+<div un="loaderr" click="loadHistoryMsg" <#if(Status!=WebMM.Constants.STATE_FAILED){#>style="display:none;"<#}#> >
+"加载失败，<a href="javascript:;">重试</a>"
+</div>
+</div>
+</div>
+</script><script type="text/html" id="chat_chooseConversation">
+<span id="noMsgTip" style="line-height:250px;">请选择一个聊天</span>
+</script><!--<script type="text/html" id="popup_profile">
+<div style="background-color:red;">
+<div id="">
+<div class="avatar_wrap"><img class="avatar" src="<#=HeadImgUrl#>"/></div>
+<div>
+<div>remark</div>
+<div><span>UserName</span><span>yihengliu</span></div>
+</div>
+</div>
+<div class="">signature</div>
+</div>
+</script>--><script type="text/html" id="popup_profile">
+<div class="profileMesg">
+<div class="profileNormMesgPanel" style="" id="">
+<div class="avatar_wrap" style=""><img class="avatar" src="<#=HeadImgUrl#>" onerror="reLoadImg(this)" /></div>
+<div class="profileNormMesgContent" style="" >
+<div class="profileNormMesgName">
+<span class="left nickname"><#=NickName#></span>
+<span class="left genderIcon <#if(Sex==1){#>maleIcon<#}else{#>femaleIcon<#}#>"></span>
+<div class="clr"></div>
+</div>
+<div class="profileNormMesgID"><span>微信号：</span><span><#=UserName#></span></div>
+</div>
+<div class="clr"></div>
+</div>
+<div class="profileNormMesgSign" <#if(!Signature){#>style="display:none;"<#}#>><#=Signature#></div>
+<div class="triangleRight"></div><!-triangle right->
+<div class="triangleLeft"></div><!-triangle left->
+</div>
+</script><script type="text/html" id="chat_detail_contact_item">
+<div class="left chatPerson" id="personal_info_<#=jQuery.getAsciiStr(Contact.UserName)#>" title="<#=jQuery.htmlEncode(jQuery.clearHtmlStr(Contact.DisplayName))#>" >
+<#if(this.IsChatroom && this.IsChatroomOwner && Contact.isSelf && !Contact.isSelf()){#>
+<a class="personClose" href="javascript:;" click="delChatroomMember" un="<#=Contact.UserName#>"></a>
+<#}#>
+<a href="javascript:;" click="showProfile" userName="<#=Contact.UserName#>"><img class="" src="<#=Contact.HeadImgUrl#>" onerror="reLoadImg(this)" /></a>
+<div class="participantMesg">
+<p class="participantName"><#=Contact.DisplayName#></p>
+<!--<span class="<#if(Contact.Sex==0){#>participantFemale<#}else{#>participantMale<#}#>"></span>-->
+</div>
+</div>
+</script><script type="text/html" id="chat_detail_panel">
+<#for(var i=0; i<Contacts.length; i++){var Contact = Contacts[i];#>
+
+<div class="left chatPerson" id="personal_info_<#=jQuery.getAsciiStr(Contact.UserName)#>" title="<#=jQuery.htmlEncode(jQuery.clearHtmlStr(Contact.DisplayName))#>" >
+<#if(this.IsChatroom && this.IsChatroomOwner && Contact.isSelf && !Contact.isSelf()){#>
+<a class="personClose" href="javascript:;" click="delChatroomMember" un="<#=Contact.UserName#>"></a>
+<#}#>
+<a href="javascript:;" click="showProfile" userName="<#=Contact.UserName#>"><img class="" src="<#=Contact.HeadImgUrl#>" onerror="reLoadImg(this)" /></a>
+<div class="participantMesg">
+<p class="participantName"><#=Contact.DisplayName#></p>
+<!--<span class="<#if(Contact.Sex==0){#>participantFemale<#}else{#>participantMale<#}#>"></span>-->
+</div>
+</div>
+
+<#}#>
+
+<div class="addButton chatPerson left" click="createChatroom"><a href="javascript:;"></a></div>
+<div class="clr"></div>
+</script><script type="text/html" id="editor_emoji_panel">
+<div style="position:absolute;"></div><ul class="faceTab"><li><a class="chooseFaceTab" href="javascript:;" click="chooseEmojiPanel@.faceTab" un="faceBox">QQ表情</a></li><li><a href="javascript:;"  click="chooseEmojiPanel@.faceTab" un="emojiBox">符号表情</a></li><#if(!isBrandContact){#><li><a href="javascript:;"  click="chooseEmojiPanel@.faceTab" un="rabbitBox">动画表情</a></li><#}#></ul><div class="faceWrap" style="zoom:1;outline:none;" tabindex="0" hidefocus="true"><div class="faceBox emojiArea" style="" click="chooseEmoji"><a title="微笑" class="f14" href="javascript:;"></a><a title="撇嘴" class="f1" href="javascript:;"></a><a title="色" class="f2" href="javascript:;"></a><a title="发呆" class="f3" href="javascript:;"></a><a title="得意" class="f4" href="javascript:;"></a><a title="流泪" class="f5" href="javascript:;"></a><a title="害羞" class="f6" href="javascript:;"></a><a title="闭嘴" class="f7" href="javascript:;"></a><a title="睡" class="f8" href="javascript:;"></a><a  title="大哭" class="f9" href="javascript:;"></a><a title="尴尬" class="f10" href="javascript:;"></a><a title="发怒" class="f11" href="javascript:;"></a><a title="调皮" class="f12" href="javascript:;"></a><a title="呲牙" class="f13" href="javascript:;"></a><a title="惊讶" class="f0 borderRightNone"href="javascript:;"></a><a title="难过" class="f15" href="javascript:;"></a><a    title="酷" class="f16" href="javascript:;"></a><a title="冷汗" class="f96" href="javascript:;"></a><a title="抓狂" class="f18" href="javascript:;"></a><a title="吐" class="f19" href="javascript:;"></a><a title="偷笑" class="f20" href="javascript:;"></a><a title="愉快" class="f21" href="javascript:;"></a><a title="白眼" class="f22" href="javascript:;"></a><a title="傲慢" class="f23" href="javascript:;"></a><a title="饥饿" class="f24" href="javascript:;"></a><a title="困" class="f25" href="javascript:;"></a><a title="惊恐" class="f26" href="javascript:;"></a><a title="流汗" class="f27" href="javascript:;"></a><a title="憨笑" class="f28" href="javascript:;"></a><a title="悠闲" class="f29 borderRightNone"href="javascript:;"></a><a title="奋斗" class="f30" href="javascript:;"></a><a title="咒骂" class="f31" href="javascript:;"></a><a title="疑问" class="f32" href="javascript:;"></a><a  title="嘘" class="f33" href="javascript:;"></a><a title="晕" class="f34" href="javascript:;"></a><a  title="疯了" class="f35" href="javascript:;"></a><a title="衰" class="f36" href="javascript:;"></a><a title="骷髅" class="f37" href="javascript:;"></a><a title="敲打" class="f38" href="javascript:;"></a><a title="再见" class="f39" href="javascript:;"></a><a title="擦汗" class="f97" href="javascript:;"></a><a title="抠鼻" class="f98" href="javascript:;"></a><a title="鼓掌" class="f99" href="javascript:;"></a><a title="糗大了" class="f100" href="javascript:;"></a><a title="坏笑" class="f101 borderRightNone"href="javascript:;"></a><a title="左哼哼" class="f102" href="javascript:;"></a><a title="右哼哼" class="f103" href="javascript:;"></a><a title="哈欠" class="f104" href="javascript:;"></a><a title="鄙视" class="f105" href="javascript:;"></a><a title="委屈" class="f106" href="javascript:;"></a><a title="快哭了" class="f107" href="javascript:;"></a><a title="阴险" class="f108" href="javascript:;"></a><a title="亲亲" class="f109" href="javascript:;"></a><a title="吓" class="f110" href="javascript:;"></a><a title="可怜" class="f111" href="javascript:;"></a><a title="菜刀" class="f112" href="javascript:;"></a><a title="西瓜" class="f89" href="javascript:;"></a><a title="啤酒" class="f113" href="javascript:;"></a><a title="篮球" class="f114" href="javascript:;"></a><a title="乒乓" class="f115 borderRightNone" href="javascript:;"></a><a title="咖啡" class="f60" href="javascript:;"></a><a title="饭" class="f61" href="javascript:;"></a><a title="猪头" class="f46" href="javascript:;"></a><a title="玫瑰" class="f63" href="javascript:;"></a><a title="凋谢" class="f64" href="javascript:;"></a><a title="嘴唇" class="f116" href="javascript:;"></a><a title="爱心" class="f66" href="javascript:;"></a><a title="心碎" class="f67" href="javascript:;"></a><a title="蛋糕" class="f53" href="javascript:;"></a><a title="闪电" class="f54" href="javascript:;"></a><a title="炸弹" class="f55" href="javascript:;"></a><a title="刀" class="f56" href="javascript:;"></a><a title="足球" class="f57" href="javascript:;"></a><a title="瓢虫" class="f117" href="javascript:;"></a><a title="便便" class="f59 borderRightNone" href="javascript:;"></a><a title="月亮" class="f75" href="javascript:;"></a><a title="太阳" class="f74" href="javascript:;"></a><a title="礼物" class="f69" href="javascript:;"></a><a title="拥抱" class="f49" href="javascript:;"></a><a title="强" class="f76" href="javascript:;"></a><a title="弱" class="f77" href="javascript:;"></a><a title="握手" class="f78" href="javascript:;"></a><a title="胜利" class="f79" href="javascript:;"></a><a title="抱拳" class="f118" href="javascript:;"></a><a title="勾引" class="f119" href="javascript:;"></a><a title="拳头" class="f120" href="javascript:;"></a><a title="差劲" class="f121" href="javascript:;"></a><a title="爱你" class="f122" href="javascript:;"></a><a title="NO" class="f123" href="javascript:;"></a><a title="OK" class="f124 borderRightNone" href="javascript:;"></a><a title="爱情" class="f42 borderBottomNone" href="javascript:;"></a><a title="飞吻" class="f85 borderBottomNone" href="javascript:;"></a><a title="跳跳" class="f43 borderBottomNone" href="javascript:;"></a><a title="发抖" class="f41 borderBottomNone" href="javascript:;"></a><a title="怄火" class="f86 borderBottomNone" href="javascript:;"></a><a title="转圈" class="f125 borderBottomNone" href="javascript:;"></a><a title="磕头" class="f126 borderBottomNone" href="javascript:;"></a><a title="回头" class="f127 borderBottomNone" href="javascript:;"></a><a title="跳绳" class="f128 borderBottomNone" href="javascript:;"></a><a title="挥手" class="f129 borderBottomNone" href="javascript:;"></a><a title="激动" class="f130 borderBottomNone" href="javascript:;"></a><a title="街舞" class="f131 borderBottomNone" href="javascript:;"></a><a title="献吻" class="f132 borderBottomNone" href="javascript:;"></a><a title="左太极" class="f133 borderBottomNone" href="javascript:;"></a><a title="右太极" class="f134 borderBottomNone borderRightNone" href="javascript:;"></a><div style="display: none;" class="facePreview"><div><p class="faceImg"><img alt="" src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif"></p><p class="faceName"></p></div></div></div> <div style="display:none;" class="emojiBox"><div class="emojiContent"><div class="emojiFacePanel" click="chooseSysEmoji"><a title="笑脸" class="" href="javascript:;"></a><a title="开心" class="" href="javascript:;"></a><a title="大笑" class="" href="javascript:;"></a><a title="热情" class="" href="javascript:;"></a><a title="眨眼" class="" href="javascript:;"></a><a title="色" class="" href="javascript:;"></a><a title="接吻" class="" href="javascript:;"></a><a title="亲吻" class="" href="javascript:;"></a><a title="脸红" class="" href="javascript:;"></a><a title="露齿笑" class="" href="javascript:;"></a><a title="满意" class="" href="javascript:;"></a><a title="戏弄" class="" href="javascript:;"></a><a title="吐舌" class="" href="javascript:;"></a><a title="无语" class="" href="javascript:;"></a><a title="得意" class="borderRightNone" href="javascript:;"></a><a title="汗" class="" href="javascript:;"></a><a title="失望" class="" href="javascript:;"></a><a title="低落" class="" href="javascript:;"></a><a title="呸" class="" href="javascript:;"></a><a title="焦虑" class="" href="javascript:;"></a><a title="担心" class="" href="javascript:;"></a><a title="震惊" class="" href="javascript:;"></a><a title="悔恨" class="" href="javascript:;"></a><a title="眼泪" class="" href="javascript:;"></a><a title="哭" class="" href="javascript:;"></a><a title="破涕为笑" class="" href="javascript:;"></a><a title="晕" class="" href="javascript:;"></a><a title="恐惧" class="" href="javascript:;"></a><a title="心烦" class="" href="javascript:;"></a><a title="生气" class="borderRightNone" href="javascript:;"></a><a title="睡觉" class="" href="javascript:;"></a><a title="生病" class="" href="javascript:;"></a><a title="恶魔" class="" href="javascript:;"></a><a title="外星人" class="" href="javascript:;"></a><a title="心" class="" href="javascript:;"></a><a title="心碎" class="" href="javascript:;"></a><a title="丘比特" class="" href="javascript:;"></a><a title="闪烁" class="" href="javascript:;"></a><a title="星星" class="" href="javascript:;"></a><a title="叹号" class="" href="javascript:;"></a><a title="问号" class="" href="javascript:;"></a><a title="睡着" class="" href="javascript:;"></a><a title="水滴" class="" href="javascript:;"></a><a title="音乐" class="" href="javascript:;"></a><a title="火" class="borderRightNone" href="javascript:;"></a><a title="便便" class="" href="javascript:;"></a><a title="强" class="" href="javascript:;"></a><a title="弱" class="" href="javascript:;"></a><a title="拳头" class="" href="javascript:;"></a><a title="胜利" class="" href="javascript:;"></a><a title="上" class="" href="javascript:;"></a><a title="下" class="" href="javascript:;"></a><a title="右" class="" href="javascript:;"></a><a title="左" class="" href="javascript:;"></a><a title="第一" class="" href="javascript:;"></a><a title="强壮" class="" href="javascript:;"></a><a title="吻" class="" href="javascript:;"></a><a title="热恋" class="" href="javascript:;"></a><a title="男孩" class="" href="javascript:;"></a><a title="女孩" class="borderRightNone" href="javascript:;"></a><a title="女士" class="" href="javascript:;"></a><a title="男士" class="" href="javascript:;"></a><a title="天使" class="" href="javascript:;"></a><a title="骷髅" class="" href="javascript:;"></a><a title="红唇" class="" href="javascript:;"></a><a title="太阳" class="" href="javascript:;"></a><a title="下雨" class="" href="javascript:;"></a><a title="多云" class="" href="javascript:;"></a><a title="雪人" class="" href="javascript:;"></a><a title="月亮" class="" href="javascript:;"></a><a title="闪电" class="" href="javascript:;"></a><a title="海浪" class="" href="javascript:;"></a><a title="猫" class="" href="javascript:;"></a><a title="小狗" class="" href="javascript:;"></a><a title="老鼠" class="borderRightNone" href="javascript:;"></a><a title="仓鼠" class="" href="javascript:;"></a><a title="兔子" class="" href="javascript:;"></a><a title="狗" class="" href="javascript:;"></a><a title="青蛙" class="" href="javascript:;"></a><a title="老虎" class="" href="javascript:;"></a><a title="考拉" class="" href="javascript:;"></a><a title="熊" class="" href="javascript:;"></a><a title="猪" class="" href="javascript:;"></a><a title="牛" class="" href="javascript:;"></a><a title="野猪" class="" href="javascript:;"></a><a title="猴子" class="" href="javascript:;"></a><a title="马" class="" href="javascript:;"></a><a title="蛇" class="" href="javascript:;"></a><a title="鸽子" class="" href="javascript:;"></a><a title="鸡" class="borderRightNone" href="javascript:;"></a><a title="企鹅" class="" href="javascript:;"></a><a title="毛虫" class="" href="javascript:;"></a><a title="章鱼" class="" href="javascript:;"></a><a title="鱼" class="" href="javascript:;"></a><a title="鲸鱼" class="" href="javascript:;"></a><a title="海豚" class="" href="javascript:;"></a><a title="玫瑰" class="" href="javascript:;"></a><a title="花" class="" href="javascript:;"></a><a title="棕榈树" class="" href="javascript:;"></a><a title="仙人掌" class="" href="javascript:;"></a><a title="礼盒" class="" href="javascript:;"></a><a title="南瓜灯" class="" href="javascript:;"></a><a title="鬼魂" class="" href="javascript:;"></a><a title="圣诞老人" class="" href="javascript:;"></a><a title="圣诞树" class="borderRightNone" href="javascript:;"></a><a title="礼物" class="" href="javascript:;"></a><a title="铃" class="" href="javascript:;"></a><a title="庆祝" class="" href="javascript:;"></a><a title="气球" class="" href="javascript:;"></a><a title="CD" class="" href="javascript:;"></a><a title="相机" class="" href="javascript:;"></a><a title="录像机" class="" href="javascript:;"></a><a title="电脑" class="" href="javascript:;"></a><a title="电视" class="" href="javascript:;"></a><a title="电话" class="" href="javascript:;"></a><a title="解锁" class="" href="javascript:;"></a><a title="锁" class="" href="javascript:;"></a><a title="钥匙" class="" href="javascript:;"></a><a title="成交" class="" href="javascript:;"></a><a title="灯泡" class="borderRightNone" href="javascript:;"></a><a title="邮箱" class="" href="javascript:;"></a><a title="浴缸" class="" href="javascript:;"></a><a title="钱" class="" href="javascript:;"></a><a title="炸弹" class="" href="javascript:;"></a><a title="手枪" class="" href="javascript:;"></a><a title="药丸" class="" href="javascript:;"></a><a title="橄榄球" class="" href="javascript:;"></a><a title="篮球" class="" href="javascript:;"></a><a title="足球" class="" href="javascript:;"></a><a title="棒球" class="" href="javascript:;"></a><a title="高尔夫" class="" href="javascript:;"></a><a title="奖杯" class="" href="javascript:;"></a><a title="入侵者" class="" href="javascript:;"></a><a title="唱歌" class="" href="javascript:;"></a><a title="吉他" class="borderRightNone" href="javascript:;"></a><a title="比基尼" class="" href="javascript:;"></a><a title="皇冠" class="" href="javascript:;"></a><a title="雨伞" class="" href="javascript:;"></a><a title="手提包" class="" href="javascript:;"></a><a title="口红" class="" href="javascript:;"></a><a title="戒指" class="" href="javascript:;"></a><a title="钻石" class="" href="javascript:;"></a><a title="咖啡" class="" href="javascript:;"></a><a title="啤酒" class="" href="javascript:;"></a><a title="干杯" class="" href="javascript:;"></a><a title="鸡尾酒" class="" href="javascript:;"></a><a title="汉堡" class="" href="javascript:;"></a><a title="薯条" class="" href="javascript:;"></a><a title="意面" class="" href="javascript:;"></a><a title="寿司" class="borderRightNone" href="javascript:;"></a><a title="面条" class="" href="javascript:;"></a><a title="煎蛋" class="" href="javascript:;"></a><a title="冰激凌" class="" href="javascript:;"></a><a title="蛋糕" class="" href="javascript:;"></a><a title="苹果" class="" href="javascript:;"></a><a title="飞机" class="" href="javascript:;"></a><a title="火箭" class="" href="javascript:;"></a><a title="自行车" class="" href="javascript:;"></a><a title="高铁" class="" href="javascript:;"></a><a title="警告" class="" href="javascript:;"></a><a title="旗" class="" href="javascript:;"></a><a title="男人" class="" href="javascript:;"></a><a title="女人" class="" href="javascript:;"></a><a title="O" class="" href="javascript:;"></a><a title="X" class="borderRightNone" href="javascript:;"></a><a title="版权" class=" borderBottomNone" href="javascript:;"></a><a title="注册商标" class=" borderBottomNone" href="javascript:;"></a><a title="商标" class=" borderBottomNone" href="javascript:;"></a></div></div></div><div style="display:none;" class="rabbitBox" click="chooseCustomEmoji"><div class="rabbitContent"><div class="rabbitPanel"><a class="r11" href="javascript:;" un="icon_002.gif"></a><a class="r12" href="javascript:;" un="icon_007.gif"></a> <a class="r13" href="javascript:;" un="icon_010.gif"></a> <a class="r14" href="javascript:;" un="icon_012.gif"></a> <a class="r15 borderRightNone" href="javascript:;" un="icon_013.gif"></a><a class="r21" href="javascript:;" un="icon_018.gif"></a><a class="r22" href="javascript:;" un="icon_019.gif"></a> <a class="r23" href="javascript:;" un="icon_021.gif"></a> <a class="r24" href="javascript:;" un="icon_022.gif"></a> <a class="r25 borderRightNone" href="javascript:;" un="icon_024.gif"></a> <a class="r31" href="javascript:;" un="icon_027.gif"></a><a class="r32" href="javascript:;" un="icon_029.gif"></a> <a class="r33" href="javascript:;" un="icon_030.gif"></a> <a class="r34" href="javascript:;" un="icon_035.gif"></a> <a class="r35 borderRightNone" href="javascript:;" un="icon_040.gif"></a> <a class="r41" href="javascript:;" un="icon_020.gif"></a></div></div></div></div><!--<a title="关闭" class="faceCloseIcon" href="javascript:;" click="closeEmojiPanel"><img src="https://res.wx.qq.com/zh_CN/htmledition/images/spacer17ced3.gif" /></a>--><div class="faceTriangle"><div class="faceTrianglePanel"><div class="faceTriangle1"></div><div class="faceTriangle2"></div></div></div>
+</script><script type="text/html" id="popupwindow">
+
+<div class="window" id="popupWindow" style="">
+<div class="header">
+<p>详细资料</p>
+<span class="closeIconPanel right">
+<a href="javascript:;" class="closeIcon" click="close"></a>
+</span>
+</div>
+<div class="content">
+
+</div>
+</div>
+</script><script type="text/html" id="popupConatctProfile">
+<div class="friendInfo">
+<div class="profileContainer" xmlns="http://www.w3.org/1999/html"><div class="loadingMaskWind" style="display:none;z-index:1000;"></div><div class="section"><div class="personalInfo"><img class="friendImg left" onerror="reLoadImg(this)" src="<#if(Avatar){#><#=Avatar#><#}else{#>/cgi-bin/mmwebwx-bin/webwxgeticon?skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>&username=<#=Contact.UserName#>&msgid=<#=MsgId#>&r=<#=jQuery.now()#><#}#>" click1="showHDAvatar"/><div class="friendMesg left"><div><span class="left nickname" ><#=Contact.NickName#></span><#if(!WebMM.util.isBrandContact(Contact.VerifyFlag)&&Contact.UserName!="weixin"&&!WebMM.util.isRoomContact(Contact.UserName)){#><span class="genderIcon <#if(Contact.Sex!=1){#>femaleIcon<#}else{#>maleIcon<#}#> left"></span><#}#><div class="clr"></div></div><#if(!WebMM.util.isRoomContact(Contact.UserName)){#><#if(Contact.Alias){#><p>微信号：<span><#=Contact.Alias#></span></p>                    <#}else if(!Contact.UserName.match(/^(wxid_|gh_).*$/)){#>                    <p>微信号：<span><#=Contact.UserName#></span></p>                    <#}#>                    <#if(!Contact.isBrandContact || !Contact.isBrandContact()){#>                    <p style="<#if(!WebMM.util.isContact(Contact.UserName) || WebMM.util.isSpUser(Contact.UserName) || Contact.UserName == WebMM.model("account").getUserInfo().UserName || Contact.UserName == "filehelper"){#>display:none;<#}#>" class="remarkSection">备注名：<a href="javascript:;" click="editRemarkName"><span class="remarkname"><#=jQuery.clearHtmlStr(Contact.RemarkName || (WebMM.model("contact").getContact(Contact.UserName) && WebMM.model("contact").getContact(Contact.UserName).RemarkName))#></span><span class="editRemarkNameIcon <#if(!Contact.RemarkName && !(WebMM.model("contact").getContact(Contact.UserName) && WebMM.model("contact").getContact(Contact.UserName).RemarkName)){#>show<#}#>" title="修改"></span></a><input class="modifyInput" type="text" style="display:none;" nickname="<#=jQuery.clearHtmlStr(Contact.NickName)#>"/></p><#}#>                <#}#> <#if(MsgType==WebMM.Constants.MM_DATA_VERIFYMSG){#><p class="valiMesg"></p><#if(/*!WebMM.util.isContact(Contact.UserName) && WebMM.model("account").isHigherVer()*/false){#><div class="replyWrapper"><a click="replyVerifyMsg" class="replyVerifyMsg" msgid="<#=MsgId#>" ticket="<#=Contact.RecommendInfo.Ticket#>" opcode="<#=Contact.RecommendInfo.OpCode#>">回复</a><div class="clr"></div></div><#}#><#}#></div><div class="clr"></div></div></div><#if(Contact.City||Contact.Province||Contact.Signature||Contact.QQNum){#><div class="section"><div class="physicalInfor"><#if(Contact.City||Contact.Province){#><p class="tr firstTr"><span class="tdLeft left">地区</span><span class="tdRight left"><#=Contact.Province#>&nbsp;<#=Contact.City#></span></p><#}#><p class="tr" <#if(!Contact.Signature){#>style="display:none;"<#}#>><span class="tdLeft left">个性签名</span><span class="tdRight left" ><#=Contact.Signature#></span></p><#if(Contact.QQNum && (Contact.Scene==4 || Contact.Scene==1)){#><p class="tr"><span class="tdLeft left">QQ</span><span class="tdRight left"><#=Contact.QQNum#></span></p><#}#></div></div><#}#><div class="section" style="display:none;"><div class="verification"><p>对方启用了朋友验证，请输入你的验证申请<br/>对方通过后你才能添加其为朋友</p><input class="inputVerifi" type="text" keyup="enterRequest@.section"><div class="operBtn"><a class="left btnBrown" href="javascript:;" un="ok"><input type="button" value="发送" click="sendRequest@.section" addSuccTips="发送成功" addErrTips="发送失败"></a><a class="btnGray right" href="javascript:;" un="cancel"><input type="button" value="取消" click="cancelRequest@.section"></a><div class="clr"></div></div></div></div><#if(Contact.UserName != WebMM.model("account").getUserName() || WebMM.model("account").isHigherVer()){#><div class="section"><div class="nextStep"><a class="<#var _oContact=WebMM.model("contact").getContact(Contact.UserName);if(_oContact&&_oContact.isContact()||MsgType==WebMM.Constants.MM_DATA_VERIFYMSG||MsgType!=WebMM.Constants.MM_DATA_VERIFYMSG){#><#}else{#>left<#}#> btnBrown" href="javascript:;"><#if(_oContact&&_oContact.isContact()){#><input type="button" value="发消息" click="enterSession" username="<#=Contact.UserName#>"><#}else{#><input type="button" value="发消息" click="enterSession" username="<#=Contact.UserName#>" style="display:none;"><input type="button" value="<#if(MsgType==WebMM.Constants.MM_DATA_VERIFYMSG){#>通过验证<#}else if(Contact.RecommendInfo && WebMM.util.isBrandContact(Contact.RecommendInfo.VerifyFlag)){#>关注<#}else{#>添加到通讯录<#}#>" click="verify@.section" username="<#=Contact.UserName#>" addSuccTips="朋友添加成功" addErrTips="朋友添加失败"><#}#></a></div></div><#}#></div><div class="hdAvatarContainer" style="display:none;"><img/><a href="javascript:;" click="returnToProfile@.hdAvatarContainer">back<a/></div>
+</div>
+</script><script type="text/html" id="popupPhotoAlbumWindow">
+<div id="popupPhotoAlbumWindow" class="popupPhotoAlbumWindow">
+    <div class="popupPhotoAlbumPanel">
+    <div class="friendCirL left">
+    <div class="friendCirLPanel">
+    <div class="photoView closePart">
+        <div class="photoViewBox" style="z-index:0;">
+                <div id="popupPhotoAlbum_photoView" class="photoWrapper" style="position:relative;overflow:hidden;">
+                        <img src=""/>        
+                    <div id="photoViewLeftPanel" class="photoViewPanel left" style="width:130px;">
+                    <div class="photoViewOper photoViewOperLeft">
+    <a class="photoPre" id="prevPhoto" href="javascript:;" click="prevPhoto"></a>
+    </div>
+    </div>
+<div id="photoViewRightPanel" class="photoViewPanel right" style="width:130px;">
+    <div class="photoViewOper photoViewOperRight">
+        <a class="photoNext" id="nextPhoto" href="javascript:;" click="nextPhoto"></a>
+    </div>
+</div>
+                    </div>
+        <div id="popupPhotoAlbum_albumContent" class="albumContentWrapper" click="toggleAlbumContent"></div>
+        </div>
+        
+        <div class="clr"></div>
+        
+    </div>
+    <div class="photoPreView closePart">
+    <p class="time" style="display:none;"><span class="date popupPhotoAlbum_albumMonth"></span>月</p>
+    <div class="timeDecorate" style="display:none;">
+    <span class="cirle cirle1"></span>
+    <span class="cirle cirleBig"></span>
+    <span class="cirle cirle3"></span>
+    <span class="cirle cirle4"></span>
+    </div>
+    <div class="photoPreList">
+    <div id="thumbPreView" class="thumbPreView">
+    <img/>
+    <div class="hook">
+    <div class="hook1"></div>
+    <div class="hook2"></div>
+    </div>
+    </div>
+    <div class="photoListOper left">
+    <a class="photoPreListPre" id="prevThumb" href="javascript:;" click="prevThumb"></a>
+    </div>
+    <div class="photoListOper right">
+    <a class="photoPreListNext" id="nextThumb" href="javascript:;" click="nextThumb"></a>
+<img id="nextThumbLoading" style="display:none;" src="https://res.wx.qq.com/zh_CN/htmledition/images/ico_loading117ced3.gif" />
+    </div>
+                        <div class="photoPreListBox">
+        <ul id="popupPhotoAlbum_thumbList"></ul>
+                        </div>
+    <div class="clr"></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="friendCirR left">
+    <div class="friendCirRPanel">
+    <a href="javascript:;" class="closeIcon" click="closePhotoAlbum"></a>
+    <div class="friendMsg closePart">
+    <div id="popupPhotoAlbum_albumInfo"></div>
+    <div id="comments" class="comments">
+        <div class="title">
+        <div class="titlePanel">
+        <span class="left"><span class="commentIcon"></span>评论</span>
+                <div class="clr"></div>
+        </div>
+        </div>
+        <ul id="popupPhotoAlbum_commentList"></ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="clr"></div>
+    </div>
+
+</div>
+</script><script type="text/html" id="popupPhotoAlbum_albumInfo">
+    <div class="info friendMsgInfo">
+        <# var contact = WebMM.model('contact').getContact(Album.UserName); #>
+        <img class="avatar left" src="<#=contact.HeadImgUrl#>" onerror="reLoadImg(this)" />
+        <div class="left">
+            <p class="name"><#=contact.RemarkName || contact.NickName || contact.UserName#></p>
+            <#if(ObjectDesc.location){#>
+                <p class="location"><#=ObjectDesc.location.city#></p>
+            <#}#>
+        </div>
+        <div class="clr"></div>
+    </div>
+
+    <div class="praise">
+        <p class="title"><span class="left"><span class="icon left"></span>赞</span>
+        <#if(Album.LikeUserListCount > 12){#>
+        <a class="right blueColor" click="showAllLike" style="cursor:pointer;" foldText="收起">展开(<#=Album.LikeUserListCount#>)</a>
+        <#}#>
+        <div class="clr"></div>
+        </p>
+        <ul id="popupPhotoAlbum_likeList">
+            <#
+                    var likeList = Album.LikeUserList,like;
+                    for(var i = 0, len = likeList.length; i < len; ++i){
+                        like = likeList[i];
+            #>
+            <li><a><img src="<#=WebMM.model('contact').getContact(like.UserName).HeadImgUrl#>" onerror="reLoadImg(this)" /></a></li>
+            <#}#>
+                <div class="clr"></div>
+        </ul>
+        
+    </div>
+</script><script type="text/html" id="popupPhotoAlbum_commentList">        
+            <#
+                    var commentList = Album.CommentUserList;
+                    var modelContact = WebMM.model("contact");
+                    var comment,contact,replyer;
+                    for(var i = 0, len = commentList.length; i < len; ++i){
+                        comment = commentList[i];
+                        contact = modelContact.getContact(comment.UserName);
+                        replyer = "";
+                        if(comment.ReplyUsername) replyer = modelContact.getContact(comment.ReplyUsername);
+            #>
+            <li>
+                <a>
+                    <img class="left avatar" src="<#=contact.HeadImgUrl#>" onerror="reLoadImg(this)" />
+                    <div class="commentPanel">
+                        <p>
+                            <span style="margin-right:10px;"><span class="commentor"><#=contact.RemarkName||comment.NickName||comment.UserName#></span>                                
+                            <span class="time right"><#=WebMM.util.formatChatMsgListTime(new Date(comment.CreateTime * 1000))#></span>
+                        </p>
+                        <p class="commentContent">
+                        <#if(replyer){#>
+                                <span class="reply">回复</span>
+                                <span class="commentor1"><#=replyer.RemarkName||replyer.NickName||comment.UserName#>&nbsp;:&nbsp;</span>
+                            <#}#>
+                            <#=comment.Content#>
+                        </p>
+                    </div>
+                    <div class="clr"></div>
+                </a>
+            </li>
+            <#}#>
+</script><script type="text/html" id="popupPhotoAlbum_albumContent">
+<#
+var content = jQuery.trim(ObjectDesc.contentDesc);
+if(content != ""){
+#>
+    <p class="albumContent"><#=content#></p>
+    <#}#>
+</script><script type="text/html" id="popupPhotoAlbum_albumDate">
+    <#
+        var date = new Date(Album.CreateTime * 1000);
+    #>
+    <span class="data"><#=date.getDate()#></span><span class="popupPhotoAlbum_albumMonth"><#=1 + date.getMonth()#></span>月
+
+</script><script type="text/html" id="popupPhotoAlbum_thumbList">
+    <#
+        for(var i = StartIndex, len = (MediaList.length < StartIndex + LoadNum) ? MediaList.length : StartIndex + LoadNum; i < len; ++i ){
+                var media = MediaList[i];
+    #>
+        <li albumindex="<#=media.albumIndex#>" url="<#=media.url#>" w="<#=media.size.width#>" h="<#=media.size.height#>"><a class="active" href="javascript:;" click="thumbClick">
+        <img loadSrc="<#=media.thumb#>" style="
+        <#var w = parseInt(media.size.width), h = parseInt(media.size.height);
+        if(w < h){#>
+            width:80px;top:<#=-parseInt(40*(h/w-1))+'px'#>;left:0;
+        <#}else{#>
+            height:80px;left:<#=-parseInt(40*(w/h-1))+'px'#>;top:0;
+        <#}#>
+        position:absolute;" onerror="reLoadImg(this)" />
+<span class="cover"></span>
+        </a></li>
+
+    <#}#>
+</script><script type="text/html" id="modify_avatar_content">
+<div class="avatorInfo" style="position:relative;">
+<div class="loadingMask" style="display:none;z-index:1000;"></div><div un="section" class="preAvartor"><div class="bigAvatarWrapper" style="position:absolute;left:69px;height:250px;width:250px;z-index:-1000;"></div><#if(HeadImgFlag!=0){#><img onerror="reLoadImg(this)" src="<#=avatar#>" class="avatarCntr"/><#}else{#><div class="avatarCntr bigAvatar"></div><#}#><div class="editOper"><a class="btn btnBrown left" href="javascript:;"><input type="button" click="gotoModify@[un=section]" value="编辑" succTips="修改头像成功" errTips="修改头像失败" /></a></div></div><div un="section" class="editAvartor" style="z-Index:2px;"><div class="editAvartorContent"><div class="editBox editAvartorLoadingContent left"></div><div class="left"><div class="previewBox"></div><form class="preForm" action="/cgi-bin/mmwebwx-bin/webwxpreview?cgi=uploadimg&fun=uploadheadimg&t=chat&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>" enctype="multipart/form-data" method="post" target="actionFrame"><input type="hidden" name="msgimgrequest" value="" /><a href="javascript:;" class="postPhoto btnGray" style="position:relative;display:block;margin:0;margin-top:10px;color:#5C6977;" title="上传图片" id="uploadFileContainer">上传图片<div style="position: absolute;top:0;left:0; width: 100%; height: 100%;overflow:hidden;filter:alpha(opacity=0);opacity:0;cursor:pointer;"><input change="uploadAvatarImg@form" type="file" name="filename" style="width:100%;height:100%;margin:0;cursor:pointer;font-size:100px;"></div></a></form></div><div class="clr" /><div class="editAvartorPanel"><form class="preForm" action="/cgi-bin/mmwebwx-bin/webwxpreview?cgi=uploadimg&fun=uploadheadimg&t=chat&skey=<#=(skey=encodeURIComponent(WebMM.model("account").getSkey()))#>" enctype="multipart/form-data" method="post" target="actionFrame"><input type="hidden" name="msgimgrequest" value="" /></form></div><div class="editOper"><a class="btn btnBrown left" href="javascript:;"><input type="button" click="cropper@.editAvartor" value="保存" succTips="修改头像成功" errTips="修改头像失败" /></a><a class="btn btnGray right" href="javascript:;"><input type="button" click="returnPre" value="取消"/></a></div></div></div>
+</div>
+</script><script type="text/html" id="voice_recorder">
+<div class="left recordBakLeft"></div>
+<div class="left recordBakMiddle">
+<#if(Status==-2){#>
+<span class="recordInfo left">不能检测到麦克风，请安装后刷新页面重试</span>
+<#}else{#>
+<span class="recordInfo left" recording="录音中">准备中...</span>
+<div class="recordVol left">
+<#for(var i=0; i<9; i++){#>
+<span style="left:<#=30+i*8#>px;" class="left voiceBac"></span>
+<#}#>
+<div class="clr"></div>
+</div>
+<span class="right recordTime"></span>
+<div class="clr"></div>
+<#}#>
+</div>
+<a class="right recordBakRight" href="javascript:;" click="cancelRecord"></a>
+<div class="clr"></div>
+</script><script type="text/html" id="verification_request">
+<div id="verification_request" addSuccTips="发送成功" addErrTips="发送失败">
+<p>对方启用了朋友验证，请输入你的验证申请<br/>对方通过后你才能添加其为朋友</p>
+<input class="inputVerify" type="text"/>
+</div>
+</script><script type="text/html" id="verification_add_group_request">
+<div id="verification_request" addSuccTips="发送成功" addErrTips="发送失败">
+<p>对方启用了朋友验证，请输入你的验证申请<br/>对方通过后你才能将其添加到群聊。</p>
+<input class="inputVerify" type="text"/>
+</div>
+</script><script type="text/html" id="verification_reply">
+<div id="verification_request" addSuccTips="发送成功" addErrTips="发送失败">
+<p>你可以回复对方的打招呼以获取更多信息。</p>
+<input class="inputVerify" type="text"/>
+</div>
+</script><script type="text/html" id="black_contact_confirm">
+<div id="black_contact_confirm">
+<p style="padding:0 18px;line-height:30px">加入黑名单，你将不再收到对方的消息 并且你们互相看不到对方朋友圈的更新</p>
+</div>
+</script><script type="text/html" id="loading_photo_album">
+<div class="loadingIcon"></div>
+</script><script type="text/html" id="profile_show_photoAlbum">
+    <#
+    var w, h, style;
+    for (var i = 0, len = (MediaList.length < showNum ? MediaList.length : showNum); i < len; ++i) {
+        var media = MediaList[i];
+        w = parseInt(media.size.width);
+        h = parseInt(media.size.height);
+        if(w < h) style = "width:40px;top:"+(-parseInt(20*(h/w-1)))+"px;left:0;";
+            else style = "height:40px;left:"+(-parseInt(20*(w/h-1)))+"px;top:0;";
+    #>
+    <div class="left"><img src="<#=media.thumb#>" style="<#=style#>" onerror="reLoadImg(this)" /></div>
+    <#}#>
+</script><script type="text/html" id="feedback">
+<div class="feedbackWin">
+<textarea id="feedback_textarea" tips="谢谢反馈！" maxlength="300" maxLength="300" keydown="edit" keyup="edit"></textarea>
+<div class="opArea">
+<a class="chatSend" href="javascript:;" click="send@.feedbackWin"><b>发送</b></a>
+</div>
+</div>
+</script><script type="text/html" id="valiMesg">
+<!-- <span class="hook"></span> -->
+<!-- <span class="hook1"></span> -->
+<#if(History.length == 1 && History[0].substr(1) == ""){#>
+<span class="valiMesgContent"><#=Contact.NickName#>&nbsp;:&nbsp;请求添加你为朋友</span>
+<#}else{#>
+<#for(var i = History.length > 3 ? History.length - 3 : 0, len = History.length; i < len; ++i){
+var from = History[i].substr(0,1),
+content = History[i].substr(1);
+#>
+<span title="<#=content#>" class="valiMesgContent">
+<#if(from == 0){#>
+<#=Contact.NickName#>:&nbsp;
+                        <#if(!content){#>
+                            请求添加你为朋友
+                        <#}else{#>
+                            <#=content#>
+                        <#}#>
+<#}else{#>
+我:&nbsp;<#=content#>
+<#}#>
+</span>
+<#}#>
+<#}#>
+</script><script type="text/html" id="verificationUinGroup">
+    <span class="friends" usernames="<#=UserNames#>"><#=Friends#></span>启用了朋友验证，你需要发送验证申请，对方通过后你才能将其添加到群聊。<a click="verifyUniContacts" class="verifyUniContacts">发送好友验证</a>
+</script><script type="text/html" id="addBlackContactGroupErrTips">
+<#=Friends#>拒绝加入群聊。
+</script><script type="text/html" id="chatListloadingMoreMsg">
+<div class="chatItem you chatListloadingMoreMsg" id="chatListloadingMoreMsg">
+    <div class="systemTip">
+        <img src="/zh_CN/htmledition/images/ico_loading1.gif" />
+        <div>加载中...</div>
+    </div>
+</div>
+</script><script type="text/javascript">
+if (window.parent) {
+parent.viewReady = true;
+parent.ready && parent.ready("view");
+}
+</script></head><body></body></html>
